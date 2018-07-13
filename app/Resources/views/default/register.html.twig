@@ -1,0 +1,55 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <!--Register page inner start-->
+    <div class="register-page-inner ptb-100 bg-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-12">
+                    <div class="register-page-form">
+                        <div class="account-title">
+                            <h5>Inscription</h5>
+                        </div>
+                        <form action="{{ url('save_user') }}" method="post">
+                            <div class="col-md-6 username">
+                                <input type="text" placeholder="Nom Utilisateur" name="username">
+                            </div>
+                            <div class="col-md-6 email">
+                                <input type="email" placeholder="Email" name="email">
+                            </div>
+                            <div class="col-md-6 password">
+                                <input type="password" placeholder="Mot de passe" name="password">
+                            </div>
+                            <div class="col-md-6 password">
+                                <input type="password" placeholder="Confirmer mot de passe" name="confirm">
+                            </div>
+                            <div class="col-md-6">
+                                <i class="icofont icofont-business-man"></i>
+                                <input type="text" placeholder="Nom" name="nom">
+                            </div>
+                            <div class="col-md-6">
+                                <i class="icofont icofont-business-man"></i>
+                                <input type="text" placeholder="Prenoms" name="prenoms">
+                            </div>
+                            <div class="col-md-6">
+                                <i class="icofont icofont-ui-call"></i>
+                                <input type="tel" placeholder="Telephone" name="phone">
+                            </div>
+                            <div class="agree-text col-md-6">
+                                <p>
+                                    <label>
+                                        <input required type="checkbox" name="accepter"> <span> J'accepte les conditions</span>
+                                    </label>
+                                </p>
+                            </div>
+                            <div class="register col-md-12">
+                                <button type="submit">Envoyer</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Register page inner end-->
+{% endblock %}

@@ -1,0 +1,80 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+<div class="title-panel">
+    <img src="{{ asset('img/page-title-background.jpg') }}" alt="title background">
+    <div class="title-group">
+        <div class="row">
+            <h1>{{ project.title }}</h1>
+            <h2>{{ project.subtitle }}</h2>
+        </div>
+
+    </div>
+</div>
+    <div class="row">
+        <div class="container">
+            <div class="flexslider project-slider">
+                <ul class="slides">
+                    {% for image in project.images %}
+                        <li data-thumb="{{ image }}">
+                            <img src="{{ image }}" />
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="container">
+            <div class="col-md-4 side-informations">
+                <ul class="side-list">
+                    <li><strong>{{ project.title }}</strong></li>
+                    <li>{{ project.subtitle }}</li>
+                    <li><strong>Auteur:</strong><em>{{ project.author }}</em></li>
+                    <li><strong>Lieu:</strong><em>{{ project.location }}</em></li>
+                    <li><strong>Periode:</strong><em>{{ project.schedule }}</em></li>
+                    <li><strong>Tags:</strong>
+                        <em>
+                            {% for tag in project.tags %}
+                                {% if not loop.first %},{% endif %}
+                                {{ tag.title }}
+                            {% endfor %}
+                        </em></li>
+                </ul>
+            </div>
+            <div class="col-md-8 description-container">
+                <h2>Details du projet</h2>
+                {{ project.description|raw }}
+                <hr>
+                <div class="more-projects">
+                    {% if previous is not null %}
+                        <a title="{{ previous.title }}" class="pull-left" href="{{ path('detail_project', { id: previous.id }) }}">Projet précédent</a>
+                    {% endif %}
+
+                    {% if next is not null %}
+                        <a title="{{ next.title }}" class="pull-right" href="{{ path('detail_project', { id: next.id }) }}">Projet suivant</a>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+{% block js %}
+    <script type="text/javascript" src="{{ asset('js/jquery.mousewheel.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/jquery.easing.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/jquery.flexslider.js') }}"></script>
+    <script type="text/javascript">
+        $(window).load(function() {
+            $('.project-slider').flexslider({
+                animation: "slide",
+                controlNav: "thumbnails"
+            });
+        });
+    </script>
+{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{{ asset('css/flexslider.css') }}">
+{% endblock %}

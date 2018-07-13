@@ -1,0 +1,63 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <div class="title-panel">
+        <img src="{{ asset('img/page-title-background.jpg') }}" alt="title background">
+        <div class="title-group">
+            <div class="row">
+                <h1>Vous voulez investir ?</h1>
+                <h2>Jetez un coup d'oeil sur nos projets</h2>
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="container filters-container portfolio-item-filter">
+            <div data-filter="*" class="cbp-filter-item cbp-filter-item-active">
+                Tous <div class="cbp-filter-counter"></div>
+            </div>
+            {% for tag in tags %}
+                <span class="gdlr-saperator">/</span>
+                <div data-filter=".{{ tag.title|lower|replace({' ': '-'}) }}" class="cbp-filter-item">
+                    {{ tag.title }} <div class="cbp-filter-counter"></div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="project-list row">
+        <div class="container">
+            <div id="grid-container" class="single_property_list">
+                {% for project in projects %}
+                    <div class="col-md-3 col-sm-4 col-xs-12 cbp-item {% for tag in project.tags %} {{ tag.title|lower|replace({' ': '-'}) }} {% endfor %}">
+                        <div class="single_property mb-30">
+                            <div class="single_propert_img">
+                                <img src="{{ project.images[0] }}" alt="">
+                            </div>
+                            <div class="single_property-text">
+                                <div class="single_property_inner">
+                                    <h4><a href="{{ path('detail_project', {id: project.id}) }}">{{ project.title }}</a></h4>
+                                    <p>{{ project.subtitle }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block js %}
+    <script type="text/javascript" src="{{ asset('js/jquery.cubeportfolio.min.js') }}"></script>
+    <script type="text/javascript">
+        $(document).ready( function() {
+            $('#grid-container').cubeportfolio({
+                filters: '.filters-container'
+            });
+        });
+    </script>
+{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{{ asset('css/cubeportfolio.min.css') }}">
+{% endblock %}

@@ -1,0 +1,276 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+    <!-- Add property page start -->
+    <div class="add-property-page pt-130">
+        <form action="{{ url('save_property') }}" method="post">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="add-property-box step-1">
+                            <div class="step-title">
+                                <h4>Etape # 1</h4>
+                            </div>
+                            <div class="basic-information-box">
+                                <div class="information-title">
+                                    <h5>Information Basique</h5>
+                                </div>
+                                <div class="basic-information-form">
+                                    <div class="row">
+                                        <div class="col-md-9 col-sm-7 col-xs-12">
+                                            <div class="input-file">
+                                                <label>Titre de la propriété</label>
+                                                <input name="title" type="text" placeholder="Mettre le titre ici">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 col-sm-5 col-xs-12">
+                                            <div class="input-file">
+                                                <label>Année de construction</label>
+                                                <input type="number" name="year" placeholder="Année">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 col-xs-12 col-sm-12">
+                                            <div class="information-text">
+                                                <label>Description complete de la propriété</label>
+                                                <textarea name="description" placeholder="Ecrire ici"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="status-step" class="add-property-box step-2">
+                            <div class="step-title">
+                                <h4>Step # 2</h4>
+                            </div>
+                            <div class="information-title">
+                                <h5>Prix</h5>
+                            </div>
+                            <div class="details-information-box">
+                                <div class="row">
+                                    <div class="image-upload-box">
+                                        <button id="sale-btn" class="btn btn-info">Vente</button>
+                                        <button id="rent-btn" class="btn btn-info">Location</button>
+                                    </div>
+
+                                </div>
+                                <div id="sale-form" class="row">
+                                    <div class="col-md-12">
+                                        <div class="input-file">
+                                            <label>Prix de vente</label>
+                                            <input type="number" name="sale_price" placeholder="Prix">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="rent-form" class="row">
+                                    <div class="col-md-4 col-sm-6 col-xs-12">
+                                        <div class="input-file">
+                                            <label>Caution</label>
+                                            <input type="number" name="rent_deposit" placeholder="Caution">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-6 col-xs-12">
+                                        <div class="input-file">
+                                            <label>Avance</label>
+                                            <input type="number" name="rent_advance" placeholder="Avance">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-6 col-xs-12">
+                                        <div class="input-file">
+                                            <label>Mensualité</label>
+                                            <input type="number" name="rent_monthly" placeholder="Mensualité">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="add-property-box step-3">
+                            <div class="step-title">
+                                <h4>Step # 3</h4>
+                            </div>
+                            <div class="information-title">
+                                <h5>Information Basique </h5>
+                            </div>
+                            <div class="details-information-box">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-6 col-xs-12 ">
+                                        <div class="input-file">
+                                            <label>Localité</label>
+                                            <select name="location" class="selectpicker" title="Localité" data-hide-disabled="true" data-live-search="true">
+                                                {% for location in locations %}
+                                                    <option value="{{ location.id }}">{{ location.title }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="input-file">
+                                            <label>Emplacement</label>
+                                            <input name="sub_location" type="text" placeholder="Emplacement">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="input-file">
+                                            <label>Type</label>
+                                            <select name="type" class="selectpicker" title="Type" data-hide-disabled="true">
+
+                                                {% for type in types %}
+                                                    <option value="{{ type.id }}">{{ type.title }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="input-file">
+                                            <label>Surface du terrain (m2)</label>
+                                            <input type="number" name="field_space" placeholder="Surface du terrain">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-6 col-xs-12">
+                                        <div class="input-file">
+                                            <label>Nombre de chambres</label>
+                                            <input type="number" name="bedroom" placeholder="Nombre de chambres">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-6 col-xs-12">
+                                        <div class="input-file">
+                                            <label>Nbr de salles de bain</label>
+                                            <input type="number" name="bathroom" placeholder="Nbr salles de bain">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-6 col-xs-12">
+                                        <div class="input-file">
+                                            <label>Nbr de cuisines</label>
+                                            <input type="number" name="kitchen" placeholder="Nbr cuisines">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-6 col-xs-12">
+                                        <div class="input-file">
+                                            <label>Surface habitable (m2)</label>
+                                            <input type="number" name="living_space" placeholder="Surface habitable">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="add-property-box step-4">
+                            <div class="step-title">
+                                <h4>Etape # 4</h4>
+                            </div>
+                            <div class="image-upload-inner">
+                                <div class="information-title">
+                                    <h5>Image gallery</h5>
+                                </div>
+                                <div id="upload-images" class="col-md-12 dropzone">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="add-property-box step-5">
+                            <div class="step-title">
+                                <h4>Etape # 5</h4>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 col-sm-5 col-xs-12">
+                                    <div class="property-features">
+                                        <div class="information-title">
+                                            <h5>Property Features</h5>
+                                        </div>
+                                    </div>
+                                    <div class="features-box">
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                {% for convenience in conveniences %}
+                                                    <div class="feature-check box1">
+                                                        <input id="convenience-{{ convenience.id }}" type="checkbox" name="conveniences[]" value="{{ convenience.id }}">
+                                                        <label for="convenience-{{ convenience.id }}">{{ convenience.title }}</label>
+                                                    </div>
+
+                                                    {% if loop.index == (conveniences|length / 2)|round %}
+                                                        </div>
+                                                        <div class="col-md-6 col-sm-6 col-xs-12 pd-left">
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {#<div class="col-md-8 col-sm-7 col-xs-12">#}
+                                    {#<div class="place-map">#}
+                                        {#<div class="information-title">#}
+                                            {#<h5>Place on Map</h5>#}
+                                        {#</div>#}
+                                        {#<div class="place-map-inner">#}
+                                            {#<div id="googleMap-2" style="width:100%;height:365px;"></div>#}
+                                        {#</div>#}
+                                    {#</div>#}
+                                {#</div>#}
+                            </div>
+                        </div>
+                        <div class="add-property-submit">
+                            <button type="submit">ADD PRPPERTY</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- Add property page End -->
+
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ asset('css/add_property.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/dropzone.css') }}">
+    <style>
+        .add-property-box.step-5 {
+            clear: both;
+        }
+    </style>
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript" src="{{ asset('js/add_property.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/dropzone.js') }}"></script>
+    <script type="text/javascript">
+        Dropzone.autoDiscover = false;
+
+
+        /* Traductions de la zone d'upload d'images */
+
+        Dropzone.prototype.defaultOptions.dictDefaultMessage = "Glissez des images ici";
+        Dropzone.prototype.defaultOptions.dictFallbackMessage = "Votre navigateur ne supporte pas le glisser-deposer d'images";
+        Dropzone.prototype.defaultOptions.dictFallbackText = "SVP utilisez le formulaire d'upload ci dessous";
+        Dropzone.prototype.defaultOptions.dictFileTooBig = "L'image est trop grande ({{ '{{filesize}}' }}MiB). Taille maximum: {{ '{{maxFilesize}}' }}MiB.";
+        Dropzone.prototype.defaultOptions.dictInvalidFileType = "Vous ne pouvez pas uploader un fichier de ce type.";
+        Dropzone.prototype.defaultOptions.dictResponseError = "Le serveur a repondu avec le code suivant {{ '{{statusCode}}' }}.";
+        Dropzone.prototype.defaultOptions.dictCancelUpload = "Annuler l'upload";
+        Dropzone.prototype.defaultOptions.dictCancelUploadConfirmation = "Etes vous sur de vouloir annuler l'upload?";
+        Dropzone.prototype.defaultOptions.dictRemoveFile = "Supprimer l'image";
+        Dropzone.prototype.defaultOptions.dictMaxFilesExceeded = "Vous ne pouvez pas uploader plus d'images.";
+
+
+        /* Initialisation de la zone d'upload d'images*/
+        $("div#upload-images").dropzone({
+            url: "{{ path('upload_from_dropzone') }}",
+            addRemoveLinks: true,
+            init: function() {
+                this.on("success", function(file, result) {
+                    var form = $(file.previewElement).parents('form');
+                    form.append($('<input data-uid="'+ file.upload.uuid +'" type="hidden" name="uploads[]" value="'+ result.file +'">'));
+
+                });
+                this.on("removedfile", function (file) {
+                    console.log(file);
+                    var input = $('[data-uid="'+file.upload.uuid+'"]');
+                    $.post("{{ path('remove_upload') }}", { 'url':  input.val() }, function () {
+                        input.remove();
+                    });
+                });
+            }
+        });
+    </script>
+{% endblock %}

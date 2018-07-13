@@ -1,0 +1,128 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <!--Register page inner start-->
+    <div class="register-page-inner ptb-100 bg-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-12">
+                    <div class="register-page-form">
+                        <div class="account-title">
+                            <h5>Nouveau projet</h5>
+                        </div>
+                        <form action="{{ url('save_project') }}" method="post">
+                            <div class="col-md-12">
+                                <input type="text" placeholder="Titre" name="title">
+                            </div>
+                            <div class="col-md-6 email">
+                                <input type="text" placeholder="Sous titre" name="subtitle">
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" placeholder="Lieu" name="location">
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" placeholder="Periode" name="schedule">
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" placeholder="Autheur" name="author">
+                            </div>
+                            <div class="col-md-12">
+                                <label for="tags">Tags</label>
+                                <select multiple id="tags" name="tags">
+                                    {% for tag in tags %}
+                                        <option value="{{ tag.id }}">{{ tag.title }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-md-12">
+                                <textarea id="description-textarea" name="description" placeholder="Description"></textarea>
+                            </div>
+                            <h6 class="col-md-12">Glissez les images dans la zone suivante</h6>
+                            <div id="upload-images" class="col-md-12 dropzone">
+
+                            </div>
+                            <div class="register col-md-12">
+                                <button type="submit">Envoyer</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Register page inner end-->
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript" src="{{ asset('trumbowyg/trumbowyg.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('trumbowyg/plugins/upload/trumbowyg.upload.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/dropzone.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/select2.min.js') }}"></script>
+    <script type="text/javascript">
+        Dropzone.autoDiscover = false;
+
+        /* Traductions de la zone d'upload d'images */
+
+        Dropzone.prototype.defaultOptions.dictDefaultMessage = "Glissez des images ici";
+        Dropzone.prototype.defaultOptions.dictFallbackMessage = "Votre navigateur ne supporte pas le glisser-deposer d'images";
+        Dropzone.prototype.defaultOptions.dictFallbackText = "SVP utilisez le formulaire d'upload ci dessous";
+        Dropzone.prototype.defaultOptions.dictFileTooBig = "L'image est trop grande ({{ '{{filesize}}' }}MiB). Taille maximum: {{ '{{maxFilesize}}' }}MiB.";
+        Dropzone.prototype.defaultOptions.dictInvalidFileType = "Vous ne pouvez pas uploader un fichier de ce type.";
+        Dropzone.prototype.defaultOptions.dictResponseError = "Le serveur a repondu avec le code suivant {{ '{{statusCode}}' }}.";
+        Dropzone.prototype.defaultOptions.dictCancelUpload = "Annuler l'upload";
+        Dropzone.prototype.defaultOptions.dictCancelUploadConfirmation = "Etes vous sur de vouloir annuler l'upload?";
+        Dropzone.prototype.defaultOptions.dictRemoveFile = "Supprimer l'image";
+        Dropzone.prototype.defaultOptions.dictMaxFilesExceeded = "Vous ne pouvez pas uploader plus d'images.";
+
+        $('#description-textarea').trumbowyg({
+            btns: [
+                ['upload'],
+                ['viewHTML'],
+                ['undo', 'redo'], // Only supported in Blink browsers
+                ['formatting'],
+                ['strong', 'em', 'del'],
+                ['superscript', 'subscript'],
+                ['link'],
+                ['insertImage'],
+                ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
+                ['unorderedList', 'orderedList'],
+                ['horizontalRule'],
+                ['removeformat'],
+                ['fullscreen']
+            ],
+            plugins: {
+                upload: {
+                    serverPath: "{{ path('upload_from_trumbowyg') }}",
+                    fileFieldName: "image"
+                }
+            }
+        });
+        $("div#upload-images").dropzone({
+            url: "{{ path('upload_from_dropzone') }}",
+            addRemoveLinks: true,
+            init: function() {
+                this.on("success", function(file, result) {
+                    var form = $(file.previewElement).parents('form');
+                    form.append($('<input data-uid="'+ file.upload.uuid +'" type="hidden" name="uploads[]" value="'+ result.file +'">'));
+
+                });
+                this.on("removedfile", function (file) {
+                    console.log(file);
+                    var input = $('[data-uid="'+file.upload.uuid+'"]');
+                    $.post("{{ path('remove_upload') }}", { 'url':  input.val() }, function () {
+                        input.remove();
+                    });
+                });
+            }
+        });
+        $('select').select2({
+            'language': 'fr'
+        });
+    </script>
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ asset('trumbowyg/ui/trumbowyg.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/dropzone.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
+{% endblock %}

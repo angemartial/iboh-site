@@ -1,0 +1,82 @@
+/*
+
+Template Name: Haven Real Estate html5 template
+Description: This is html5 template
+Author: Devitems
+Version: 1.0
+
+NOTE: This is color stylesheet of Color Scheme.
+
+*/
+
+/*************************
+		General
+*************************/
+
+
+/** selection **/
+
+*::-moz-selection {
+    background: #44b272;
+    color: #fff;
+    text-shadow: none;
+}
+
+::-moz-selection {
+    background: #44b272;
+    color: #fff;
+    text-shadow: none;
+}
+
+::selection {
+    background: #44b272;
+    color: #fff;
+    text-shadow: none;
+}
+/*-------
+    Background color
+--------*/
+.header-top,.slide1-text .contact-us a,.ui-slider .ui-slider-range,.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default,#scrollUp,.property-desc,.single-property span.bg-blue,.team-member-social > a:hover,.footer-bottom,.error-content .go-home,.search-box-area,.step-title h4::before,.package-title,.package-select > button,.aside-title h5::before,.register > button, .login > button,div.style-customizer ul.layoutstyle li,.style-customizer .buy-now a.button.button-border, .style-customizer a.button.button-border{
+  background: #44b272 none repeat scroll 0 0;
+}
+
+/*-------
+    color 
+--------*/
+.header-menu ul li .dropdown_menu li a:hover,.slide1-text .contact-us a:hover,.find-home-title > h3,.feature-property-title > h3,.welcome-title .title-1,.welcome-title .title-2,.section-title h3,.error-content h2,.step-title h4,.contact-title > h5,.working-title > h5, .contact-inquiry-title > h5,.aside_title h5,.profile-title > h5,.aside-title h5,.list_property .property-desc-top h6{
+  color: #44b272;
+}
+
+
+/*-------
+    Rgba color
+--------*/
+.overlay-blue::before {
+  background: rgba(68,  178, 114, 0.95) none repeat scroll 0 0;
+}
+.singe-footer-newsletter,.single-footer-contact,.find-home-3 .find-home-box{
+  background: rgba(68,  178, 114, 0.85) none repeat scroll 0 0;
+}
+.discount-img::before{
+    background: rgba(68,  178, 114, 0.54) none repeat scroll 0 0;
+}
+.find-home-box,.single_property-text {
+  background: rgba(68,  178, 114, 0.7) none repeat scroll 0 0;
+}
+.video-sidebar::before {
+  background: rgba(68,  178, 114, 0.45) none repeat scroll 0 0;
+}
+/*-------
+    Border color
+--------*/
+.team-member-social > a:hover,div.style-customizer ul.layoutstyle li{
+  border-color: #44b272;
+}
+
+
+
+/** Color **/
+
+a:hover, a,  .separator i, button{
+    color: #44b272;
+}
