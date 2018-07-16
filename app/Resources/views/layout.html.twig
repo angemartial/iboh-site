@@ -44,15 +44,21 @@
                             <div class="header-1-top-inner">
                                 <div class="header-topbar-menu">
                                     <ul>
-                                        <li><span><img src="img/icon/mail.png" alt=""></span></li>
                                         <li><a href="agency.html"></a></li>
-                                        <li><a data-target="#quick-view" data-toggle="modal" href="{{ path('login') }}">Se connecter</a></li>
-                                        <li><a href="{{ path('register') }}">S'inscrire</a></li>
+
+                                        {% if is_granted('ROLE_USER') %}
+                                            <li><a href="{{ path('myaccount', {username: app.user.username }) }}">Connecté en tant que {{ app.user.username }} !</a></li>
+                                            <li><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
+                                        {% else %}
+                                            <li><a href="{{ path('dup_user_security_login') }}">Se connecter</a></li>
+                                            <li><a href="{{ path('register') }}">S'inscrire</a></li>
+                                        {% endif %}
+
                                     </ul>
                                 </div>
                                 <div class="header-search">
                                     <div class="search-icon">
-                                        <a href="#"><img src="img/icon/search.png" alt=""></a>
+                                        <a href="#"><img src="#" alt=""></a>
                                     </div>
                                 </div>
                             </div>
@@ -126,18 +132,26 @@
                 </div>
                 <!-- Mobile menu end -->
             </div>
-            <div class="header-bottom">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12 col-xs-12">
 
-                            <div class="add-property">
-                                <a href="{{ path('add_property') }}">Ajouter une propriété</a>
+            {% if is_granted('ROLE_ADMIN') %}
+                <div class="header-bottom">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+
+                                <div class="add-property">
+                                    <a href="{{ path('add_property') }}">Ajouter une propriété</a>
+                                </div>
+                                <div class="add-property">
+                                    <a href="{{ path('add_project') }}">Ajouter un projet</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            {% endif %}
+
+
         </header>
 
         <div class="row">
@@ -185,8 +199,6 @@
             <!--Footer bottom end-->
         </footer>
     </div>
-
-
     <!-- Placed js at the end of the document so the pages load faster -->
 
     <!-- Map js code here -->

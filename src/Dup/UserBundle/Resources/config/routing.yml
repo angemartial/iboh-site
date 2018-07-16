@@ -1,0 +1,40 @@
+dup_user_promote_super_admin:
+    path:     /user/make-super-admin/{id}/{type}
+    defaults: { _controller: DupUserBundle:Admin:promote, type: super-admin }
+
+dup_user.update:
+    path : /user/update
+    defaults : { _controller : DupUserBundle:Default:updateUser }
+    methods : POST
+
+dup_user_online:
+    path:     /user/online
+    defaults: { _controller: DupUserBundle:Default:changeActionDate }
+
+dup_user_registration:
+    path:     /register
+    defaults: { _controller: DupUserBundle:Registration:Register}
+
+dup_user_promote_admin:
+    path:     /user/make-admin/{id}/{type}
+    defaults: { _controller: DupUserBundle:Admin:promote, type: admin }
+
+dup_user_promote_non_published:
+    path:     /user/make-non-published/{id}/{type}
+    defaults: { _controller: DupUserBundle:Admin:promote, type: non-published }
+
+dup_user_demote_user:
+    path:     /user/make-user/{id}/{type}
+    defaults: { _controller: DupUserBundle:Admin:promote, type: user }
+
+dup_user_logout:
+    path: /logout
+    defaults: { _controller: FOSUserBundle:Security:logout, _locale : fr}
+
+dup_user_security_check:
+    path: /login-check
+    defaults: { _controller: FOSUserBundle:Security:check, _locale : fr}
+
+dup_user_security_login:
+    path: /login
+    defaults: { _controller: FOSUserBundle:Security:login, _locale : fr}

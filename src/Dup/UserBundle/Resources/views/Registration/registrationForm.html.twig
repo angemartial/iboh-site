@@ -1,0 +1,49 @@
+{% extends "::layout.html.twig" %}
+    {% block content %}
+        <form action="{{ path('dup_user_registration') }}" {{ form_enctype(form) }} method="POST">
+            <div id="userlogin" class="col-md-5 col-lg-5 col-sm-12 col-xs-12 panel panel-default">
+                <div class="panel-heading" id="pinned-list-heading">
+                    <h2 class="panel-title">
+                        Formulaire d'inscription
+                    </h2>
+                </div>
+                <div class="panel-body">
+                    <span class="inputs">
+                        {{ form_label(form.username) }}
+                        {{ form_widget(form.username) }}
+                    </span>
+                    <span class="inputs">
+                        {{ form_label(form.email) }}
+                        {{ form_widget(form.email) }}
+                    </span>
+                    <span class="inputs">
+                        {{ form_label(form.plainPassword.first) }}
+                        {{ form_widget(form.plainPassword.first) }}
+                    </span>
+                    <span class="inputs">
+                        {{ form_label(form.plainPassword.second) }}
+                        {{ form_widget(form.plainPassword.second) }}
+                    </span>
+                    <span class="inputs">
+                        {{ form_label(form.nom) }}
+                        {{ form_widget(form.nom) }}
+                    </span>
+                    <span class="inputs">
+                        {{ form_label(form.prenoms) }}
+                        {{ form_widget(form.prenoms) }}
+                    </span>
+                    <span class="inputs">
+                        {{ form_label(form.userType) }}
+                        {{ form_widget(form.userType) }}
+                    </span>
+                    {{ form_rest(form) }}
+                </div>
+                <div class="panel-footer" style="margin-top: 0">
+                    <div class="pull-right">
+                        <input class="btn btn-primary super-link" type="submit" value="S'inscrire" />
+                        <a href="{{ path('fos_user_security_login') }}" class="btn btn-primary super-link em">Ou se connecter</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    {% endblock content %}

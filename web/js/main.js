@@ -189,16 +189,16 @@
         time: 5000
     });
     
-     /*-------------------------------------------
-    	scrollUp jquery active
-    --------------------------------------------- */
-    $.scrollUp({
-        scrollText: '<i class="icofont icofont-simple-up"></i>',
-        easingType: 'linear',
-        scrollSpeed: 900,
-        animation: 'fade'
-    });
-    
+    //  /*-------------------------------------------
+    // 	scrollUp jquery active
+    // --------------------------------------------- */
+    // $.scrollUp({
+    //     scrollText: '<i class="icofont icofont-simple-up"></i>',
+    //     easingType: 'linear',
+    //     scrollSpeed: 900,
+    //     animation: 'fade'
+    // });
+    //
     /*-----------------------------
     Loader activation here. 
     -------------------------------*/

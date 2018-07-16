@@ -1,0 +1,30 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+
+<form action="{{ path("fos_user_security_check") }}" method="post">
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+    <div class="form-row">
+        <input placeholder="pseudo ou email" type="text" id="username" name="_username" value="{{ last_username }}" required="required" class="textinput" />
+    </div>
+    <div class="form-row">
+        <input placeholder="votre mot de passe" type="password" id="password" name="_password" required="required" class="textinput" />
+    </div>
+    <div class="form-row center">
+        <input type="submit" id="_submit" name="_submit" value="Se connecter" class=" btn btn-primary"/>
+    </div>
+    <hr><br>
+    <div class="form-row" style="text-align:center;">
+        Se connecter via un réseau social
+    </div>
+    <div class="form-row center social">
+        <img src="{{ asset('bundles/dupbaab/images/facebook.svg') }}" alt="">
+        <img src="{{ asset('bundles/dupbaab/images/twitter.svg') }}" alt="">
+        <img src="{{ asset('bundles/dupbaab/images/googleplus.svg') }}" alt="">
+    </div>
+    <hr><br>
+    <div class="form-row center">
+        <a href="#" class="btn btn-primary" id="register-switch-button">Creer un compte</a>
+    </div>
+</form>
+{% endblock fos_user_content %}

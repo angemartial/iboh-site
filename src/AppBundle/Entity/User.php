@@ -16,7 +16,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * Class User
  * @package AppBundle\Entity
  *
- * @ORM\Table(name="user")
+ * @ORM\Table(name="iboh_user")
  * @ORM\Entity()
  */
 class User

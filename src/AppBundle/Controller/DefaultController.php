@@ -11,6 +11,7 @@ use AppBundle\Entity\Sale;
 use AppBundle\Entity\Tag;
 use AppBundle\Entity\Type;
 use AppBundle\Entity\User;
+use Dup\UserBundle\DupUserBundle;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -20,7 +21,7 @@ use Symfony\Component\HttpFoundation\Request;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/index", name="index")
+     * @Route("/", name="index")
      */
     public function indexAction(Request $request)
     {
@@ -37,7 +38,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/ajouter-propriete", name="add_property")
+     * @Route("/admin/ajouter-propriete", name="add_property")
      */
     public function createPropertyAction(Request $request)
     {
@@ -64,7 +65,7 @@ class DefaultController extends Controller
 
     /**
      * @param Request $request
-     * @Route("/sauvegarder-propriete", name="save_property")
+     * @Route("/admin/sauvegarder-propriete", name="save_property")
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function savePropertyAction(Request $request)
@@ -145,13 +146,7 @@ class DefaultController extends Controller
         }, $strings);
     }
 
-    /**
-     * @Route("/connexion", name="login")
-     */
-    public function loginAction(request $request)
-    {
-        return $this->render('default/login.html.twig');
-    }
+
 
     /**
      * @Route("/page-des-biens/{page}", name="property")
@@ -231,7 +226,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/ajouter-projet", name="add_project")
+     * @Route("/admin/ajouter-projet", name="add_project")
      */
     public function addProjectAction(request $request)
     {
@@ -264,7 +259,7 @@ class DefaultController extends Controller
     {
 
         $em = $this->getDoctrine()->getManager();
-        $user = $em->getRepository(User::class)->findOneBy(['username' => $username]);
+        $user = $em->getRepository(\Dup\UserBundle\Entity\User::class)->findOneBy(['username' => $username]);
 
         return $this->render('default/myaccount.html.twig', ['user' => $user]);
     }
@@ -425,7 +420,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/enregistrer-projet", name="save_project")
+     * @Route("/admin/enregistrer-projet", name="save_project")
      */
     public function saveProjectAction(request $request){
         $posts = $request->request->all();
