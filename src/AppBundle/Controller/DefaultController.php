@@ -169,18 +169,18 @@ class DefaultController extends Controller
 
 
     /**
-     * @Route("/page-des-biens/{page}", name="property")
+     * @Route("/proprietes/{page}", name="property")
      * @param Request $request
      * @param int $page
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function pageProperty(request $request, $page = 1)
     {
-        $max = 12;
+        $max = 2;
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository(Property::class);
         $properties = $repository->loadProperties($max, $page);
-        return $this->render('default/property.html.twig', ['properties' => $properties, 'page' => $page, 'max' => $max]);
+        return $this->render('default/property.html.twig', ['properties' => $properties, 'page' => $page, 'max' => $max, 'isSearch' => false]);
     }
 
     /**
@@ -419,7 +419,10 @@ class DefaultController extends Controller
         $form->handleRequest($request);
 
         if($form->isSubmitted()){
-
+            $search = $form->getData();
+            $repository = $em->getRepository(Property::class);
+            $result = $repository->search($search);
+            return $this->render('default/property.html.twig', ['properties' => $result, 'page' => 1, 'max' => 12, 'isSearch' => true]);
         }
 
         return $this->render('default/search-property.html.twig', [

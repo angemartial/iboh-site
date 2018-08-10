@@ -1,102 +1,17 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-    <!--slider section start-->
-    <div class="slider-container overlay" >
-        <!-- Slider Image -->
-        <div id="mainSlider" class="nivoSlider slider-image">
-            <img src="{{ asset('img/slider/22.jpg') }}" alt="" title="#htmlcaption1"/>
-            <img src="{{ asset('img/slider/11.jpg') }}" alt="" title="#htmlcaption2"/>
-            <img src="{{ asset('img/slider/3.jpg') }}" alt="" title="#htmlcaption3"/>
-        </div>
-        <!-- Slider Caption 1 -->
-        <div id="htmlcaption1" class="nivo-html-caption slider-caption-1">
-            <div class="display-table">
-                <div class="display-tablecell">
-                    <div class="container ">
-                        <div class="row">
-                            <div class="col-md-12 col-sm-12 col-xs-12">
-                                <div class="slide1-text">
-                                    <div class="middle-text">
-                                        <div class="title-1 wow fadeUp" data-wow-duration="1.2s" data-wow-delay="0.1s">
-                                            <h3>WANT TO BUY OR RENT HOME ?</h3>
-                                        </div>
-                                        <div class="title-2 wow fadeUp" data-wow-duration="1.3s" data-wow-delay="0.2s">
-                                            <h1><span>HAVEN</span> SOLVE YOUR PROBLEMS</h1>
-                                        </div>
-                                        <div class="desc wow fadeUp" data-wow-duration="1.4s" data-wow-delay="0.4s">
-                                            <p>Lorem consectetur adipiscing elit, sed do eiusmod tempor dolor sit amet<br> contetur  adipiscing elit, sed do eiusmod tempor incididunt </p>
-                                        </div>
-                                        <div class="contact-us wow fadeUp" data-wow-duration="1.5s" data-wow-delay=".5s">
-                                            <a href="contact.html">CONTACT US</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <div class="title-panel">
+        <img src="{{ asset('img/page-title-background.jpg') }}" alt="title background">
+        <div class="title-group">
+            <div class="row">
+                <h1>Propriétés</h1>
             </div>
-        </div>
-        <div id="htmlcaption2" class="nivo-html-caption slider-caption-1">
-            <div class="display-table">
-                <div class="display-tablecell">
-                    <div class="container ">
-                        <div class="row">
-                            <div class="col-md-12 col-sm-12 col-xs-12">
-                                <div class="slide1-text">
-                                    <div class="middle-text">
-                                        <div class="title-1 wow fadeUp" data-wow-duration="1.2s" data-wow-delay="0.1s">
-                                            <h3>WANT TO BUY OR RENT HOME ?</h3>
-                                        </div>
-                                        <div class="title-2 wow fadeUp" data-wow-duration="1.3s" data-wow-delay="0.2s">
-                                            <h1><span>HAVEN</span> SOLVE YOUR PROBLEMS</h1>
-                                        </div>
-                                        <div class="desc wow fadeUp" data-wow-duration="1.4s" data-wow-delay="0.4s">
-                                            <p>Lorem consectetur adipiscing elit, sed do eiusmod tempor dolor sit amet<br> contetur  adipiscing elit, sed do eiusmod tempor incididunt </p>
-                                        </div>
-                                        <div class="contact-us wow fadeUp" data-wow-duration="1.5s" data-wow-delay=".5s">
-                                            <a href="contact.html">CONTACT US</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="htmlcaption3" class="nivo-html-caption slider-caption-1">
-            <div class="display-table">
-                <div class="display-tablecell">
-                    <div class="container ">
-                        <div class="row">
-                            <div class="col-md-12 col-sm-12 col-xs-12">
-                                <div class="slide1-text">
-                                    <div class="middle-text">
-                                        <div class="title-1 wow fadeUp" data-wow-duration="1.2s" data-wow-delay="0.1s">
-                                            <h3>WANT TO BUY OR RENT HOME ?</h3>
-                                        </div>
-                                        <div class="title-2 wow fadeUp" data-wow-duration="1.3s" data-wow-delay="0.2s">
-                                            <h1><span>HAVEN</span> SOLVE YOUR PROBLEMS</h1>
-                                        </div>
-                                        <div class="desc wow fadeUp" data-wow-duration="1.4s" data-wow-delay="0.4s">
-                                            <p>Lorem consectetur adipiscing elit, sed do eiusmod tempor dolor sit amet<br> contetur  adipiscing elit, sed do eiusmod tempor incididunt </p>
-                                        </div>
-                                        <div class="contact-us wow fadeUp" data-wow-duration="1.5s" data-wow-delay=".5s">
-                                            <a href="contact.html">CONTACT US</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
         </div>
     </div>
-    <!--slider section end-->
     <!--Find home area start-->
+    {#
     <div class="find-home">
         <div class="container">
             <div class="row">
@@ -105,6 +20,7 @@
                         <h3>TROUVER VOTRE MAISON DE REVE</h3>
                     </div>
                 </div>
+
                 <form action="#">
                     <div class="col-md-3 col-sm-4 col-xs-12">
                         <div class="find-home-item custom-select mb-40">
@@ -206,12 +122,16 @@
                 </form>
             </div>
         </div>
-    </div>
+    </div>#}
     <!--Find home area end-->
 
 
     <!--property list-->
-    <div class="feature-property pt-130">
+    <div class="feature-property pt-50">
+        {% if isSearch %}
+            <h2 class="container pb-20">Resultat de la recherche</h2>
+        {% endif %}
+
         <div class="container">
             <div class="row property-list-row">
                 {% for property in properties %}
@@ -262,6 +182,13 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                {% else %}
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <p>
+                        Aucune propriété ne correspond
+                    </p>
+
                 </div>
                 {% endfor %}
             </div>

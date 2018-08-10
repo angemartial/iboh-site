@@ -44,9 +44,9 @@ class PropertySearch
     private $bathRooms;
 
     /**
-     * @var int
+     * @var string
      */
-    private $priceMin = 0;
+    private $priceMin;
 
     /**
      * @return Location
@@ -144,21 +144,7 @@ class PropertySearch
         $this->bathRooms = $bathRooms;
     }
 
-    /**
-     * @return int
-     */
-    public function getPriceMin(): ?int
-    {
-        return $this->priceMin;
-    }
 
-    /**
-     * @param int $priceMin
-     */
-    public function setPriceMin(int $priceMin)
-    {
-        $this->priceMin = $priceMin;
-    }
 
     /**
      * @return int
@@ -180,6 +166,24 @@ class PropertySearch
      * @var int
      */
     private $priceMax;
+
+    /**
+     * @return string
+     */
+    public function getPriceMin(): ?string
+    {
+        return $this->priceMin;
+    }
+
+    /**
+     * @param string $priceMin
+     * @return PropertySearch
+     */
+    public function setPriceMin($priceMin)
+    {
+        $this->priceMin = $priceMin;
+
+    }
 
 
 }

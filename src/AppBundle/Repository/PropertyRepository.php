@@ -2,6 +2,7 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Extra\PropertySearch;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
@@ -24,6 +25,56 @@ class PropertyRepository extends \Doctrine\ORM\EntityRepository
             ->setMaxResults($max);
 
         return new Paginator($qb);
+
+    }
+
+    public function search(PropertySearch $search){
+        $qb = $this->createQueryBuilder('p');
+
+        if(null !== $search->getLocation()){
+            $qb->andWhere('p.location = :location')
+                ->setParameter('location', $search->getLocation());
+        }
+
+        $subLocation = trim(strip_tags($search->getSubLocation())) ;
+        if(false === empty($subLocation)){
+            $qb->andWhere('p.subLocation LIKE :subLocation')
+                ->setParameter('subLocation', '%'.$subLocation.'%');
+        }
+
+        $minArea = (int) $search->getMinArea();
+        if($minArea){
+            $qb->andWhere('p.livingSpace >= :minArea')
+                ->setParameter(':minArea', $minArea);
+        }
+
+        $maxArea = (int) $search->getMaxArea();
+        if($maxArea){
+            $qb->andWhere('p.livingSpace <= :maxArea')
+                ->setParameter(':maxArea', $maxArea);
+        }
+
+        $bathRooms = (int) $search->getBathRooms();
+        if($bathRooms){
+            $qb->andWhere('p.bathroom = :bathrooms')
+                ->setParameter(':bathrooms', $bathRooms);
+        }
+
+        $bedRooms = (int) $search->getBedRooms();
+        if($bedRooms){
+            $qb->andWhere('p.bedroom = :bedrooms')
+                ->setParameter(':bedrooms', $bedRooms);
+        }
+
+//        $price = (int) $search->getPriceMax();
+//        list($min, $max) = explode('-', $price);
+//        $min = (int) $min;
+//        $max = (int) $max;
+//        if($min && $max){
+//
+//        }
+
+        return $qb->getQuery()->getResult();
 
     }
 }
