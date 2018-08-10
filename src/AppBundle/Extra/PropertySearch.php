@@ -51,7 +51,7 @@ class PropertySearch
     /**
      * @return Location
      */
-    public function getLocation(): ?Location
+    public function getLocation()
     {
         return $this->location;
     }
@@ -67,7 +67,7 @@ class PropertySearch
     /**
      * @return string
      */
-    public function getSubLocation(): ?string
+    public function getSubLocation()
     {
         return $this->subLocation;
     }
@@ -83,7 +83,7 @@ class PropertySearch
     /**
      * @return int
      */
-    public function getMinArea(): ?int
+    public function getMinArea()
     {
         return $this->minArea;
     }
@@ -99,7 +99,7 @@ class PropertySearch
     /**
      * @return int
      */
-    public function getMaxArea(): ?int
+    public function getMaxArea()
     {
         return $this->maxArea;
     }
@@ -115,7 +115,7 @@ class PropertySearch
     /**
      * @return int
      */
-    public function getBedRooms(): ?int
+    public function getBedRooms()
     {
         return $this->bedRooms;
     }
@@ -131,7 +131,7 @@ class PropertySearch
     /**
      * @return int
      */
-    public function getBathRooms(): ?int
+    public function getBathRooms()
     {
         return $this->bathRooms;
     }
@@ -149,7 +149,7 @@ class PropertySearch
     /**
      * @return int
      */
-    public function getPriceMax(): ?int
+    public function getPriceMax(): int
     {
         return $this->priceMax;
     }
@@ -170,7 +170,7 @@ class PropertySearch
     /**
      * @return string
      */
-    public function getPriceMin(): ?string
+    public function getPriceMin()
     {
         return $this->priceMin;
     }
