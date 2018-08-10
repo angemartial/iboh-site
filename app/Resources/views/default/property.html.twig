@@ -225,13 +225,13 @@
                             {% endif %}
                         </span>
                         <div class="property-img">
-                            <a href="single-properties.html">
-                                <img src="{% if property.images is not empty %} {{ property.images[0] }} {% else %} {{ asset('img/property/7.jpg') }} {% endif %}" alt="">
+                            <a href="{{ path('property_details', {id: property.id}) }}">
+                                <img src="{% if property.images is not empty %} {{ asset('uploads/' ~ property.images[0])  }} {% else %} {{ asset('img/property/7.jpg') }} {% endif %}" alt="">
                             </a>
                         </div>
                         <div class="property-desc">
                             <div class="property-desc-top">
-                                <h6><a href="single-properties.html">{{ property.title }}</a></h6>
+                                <h6><a href="{{ path('property_details', {id: property.id}) }}">{{ property.title }}</a></h6>
                                 <h4 class="price">{% if property.sale is not null %}
                                         {{ property.sale.price }}
                                     {% else %}

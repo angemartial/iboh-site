@@ -368,7 +368,7 @@ class Property
     /**
      * @return Convenience[]
      */
-    public function getConveniences(): array
+    public function getConveniences()
     {
         return $this->conveniences;
     }

@@ -4,11 +4,11 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>{% block title %} Iboh Company {% endblock %}</title>
+    <title>{% block title %} Iboh Immobilier {% endblock %}</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Place favicon.ico in the root directory -->
-    <link href="{{ asset('img/apple-touch-icon.png') }}" type="img/x-icon" rel="shortcut icon">
+    <link href="#" type="img/x-icon" rel="shortcut icon">
     <!-- All css files are included here. -->
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/core.css') }}">
@@ -44,7 +44,7 @@
                             <div class="header-1-top-inner">
                                 <div class="header-topbar-menu">
                                     <ul>
-                                        <li><a href="agency.html"></a></li>
+                                        <li><a href="#"></a></li>
 
                                         {% if is_granted('ROLE_USER') %}
                                             <li><a href="{{ path('myaccount', {username: app.user.username }) }}">Connecté en tant que {{ app.user.username }} !</a></li>
@@ -84,22 +84,21 @@
 
                                                 </ul>
                                             </li>
-                                            <li><a href="#">Import & Export</a></li>
-                                            <li><a href="{{ path('investissement') }}">Investissements</a>
-                                                <ul class="dropdown_menu">
-                                                    <li><a href="{{ path('property') }}">Immobiliers</a></li>
-                                                    <li><a href="#">Crypto-monnaie</a></li>
-
-                                                </ul>
+                                            <li><a href="#">Achetez</a></li>
+                                            <li><a href="#">Louez</a>
+                                                {#<ul class="dropdown_menu">#}
+                                                    {#<li><a href="{{ path('property') }}">Immobiliers</a></li>#}
+                                                    {#<li><a href="#">Crypto-monnaie</a></li>#}
+                                                {#</ul>#}
                                             </li>
 
 
-                                            <li><a href="#">Web service</a>
+                                            <li><a href="#">Vendez</a>
                                                 <ul class="dropdown_menu">
 
                                                 </ul>
                                             </li>
-                                            <li><a href="{{ path('contact') }}"> Contact</a></li>
+                                            <li><a href="{{ path('contact') }}"> Contactez-nous</a></li>
                                         </ul>
                                     </nav>
                                 </div>
@@ -117,14 +116,14 @@
                                         <ul>
                                         </ul>
                                     </li>
-                                    <li><a href="#">Nos Services</a></li>
-                                    <li><a href="{{ path('investissement') }}"> Investissements</a>
+                                    <li><a href="#">Achetez</a></li>
+                                    <li><a href="#"> Louez</a>
                                         <ul>
                                         </ul>
                                     </li>
-                                    <li><a href="{{ path('property') }}">Immobiliers</a>
+                                    <li><a href="#">Vendez</a>
                                     </li>
-                                    <li><a href="{{ path('contact') }}"> Contact</a></li>
+                                    <li><a href="{{ path('contact') }}"> Contactez-nous</a></li>
                                 </ul>
                             </nav>
                         </div>
@@ -180,17 +179,16 @@
                             <div class="footer-menu">
                                 <ul>
                                     <li><a href="{{ path('index')}}">Accueil</a></li>
-                                    <li><a href="#">Nos Services</a></li>
-                                    <li><a href="{{ path('investissement') }}">Investissements</a></li>
-                                    <li><a href="{{ path('property') }}">Immobiliers</a></li>
-                                    <li><a href="{{ path('contact') }}">Contact </a></li>
+                                    <li><a href="#">Achetez</a></li>
+                                    <li><a href="#">Louez</a></li>
+                                    <li><a href="#">Vendez</a></li>
+                                    <li><a href="{{ path('contact') }}">Contactez-nous </a></li>
                                 </ul>
                             </div>
                         </div>
                         <div class="col-md-5 col-sm-12 col-xs-12">
                             <div class="copyright">
-                                <p>Copyright <i class="fa fa-copyright"></i> 2018 <a href="#">Iboh Company</a>. All rights
-                                    reserved.</p>
+                                <p>Copyright <i class="fa fa-copyright"></i> 2018 <a href="#">Iboh Company</a></p>
                             </div>
                         </div>
                     </div>

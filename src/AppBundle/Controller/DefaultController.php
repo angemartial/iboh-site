@@ -11,6 +11,8 @@ use AppBundle\Entity\Sale;
 use AppBundle\Entity\Tag;
 use AppBundle\Entity\Type;
 use AppBundle\Entity\User;
+use AppBundle\Extra\PropertySearch;
+use AppBundle\Form\PropertySearchType;
 use Dup\UserBundle\DupUserBundle;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -146,6 +148,24 @@ class DefaultController extends Controller
         }, $strings);
     }
 
+    /**
+     * @param Request $request
+     * @param $id
+     * @Route("/details-propriete/{id}", name="property_details")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function propertyDetails(Request $request, $id){
+        $em = $this->getDoctrine()->getManager();
+
+        $property = $em->find(Property::class, (int) $id);
+
+        if(null === $property){
+            throw $this->createNotFoundException('Propriété inexistante');
+        }
+
+        return $this->render('default/detail-property.html.twig', ['property' => $property]);
+
+    }
 
 
     /**
@@ -176,7 +196,14 @@ class DefaultController extends Controller
      */
     public function uploadFromTrumbowygAction(Request $request){
         $file = $request->files->get('image');
-        return new JsonResponse($this->update($file));
+        $manager = $this->get('assets.packages');
+        $result = $this->upload($file);
+        $path = $manager->getUrl('uploads/'.$result['file']);
+
+        return new JsonResponse([
+            'success' => true,
+            'file' => $path
+        ]);
     }
 
     /**
@@ -184,7 +211,7 @@ class DefaultController extends Controller
      */
     public function uploadFromDropzoneAction(Request $request){
         $file = $request->files->get('file');
-        return new JsonResponse($this->update($file));
+        return new JsonResponse($this->upload($file));
     }
 
     /**
@@ -205,7 +232,7 @@ class DefaultController extends Controller
         return new JsonResponse([$result]);
     }
 
-    private function update($file){
+    private function upload($file){
         if(null !== $file && $file instanceof UploadedFile){
             $extension = $file->guessClientExtension();
             $extension = $this->clean($extension);
@@ -213,10 +240,9 @@ class DefaultController extends Controller
             $uploadDirectory = $this->getParameter('kernel.project_dir').'/web/uploads';
             $filename = $uniqid.'.'.$extension;
             $file->move($uploadDirectory, $filename);
-            $manager = $this->get('assets.packages');
             return [
                 'success' => true,
-                'file' => $manager->getUrl('uploads/'.$filename)
+                'file' => $filename
             ];
         }
 
@@ -379,6 +405,27 @@ class DefaultController extends Controller
 
         return $this->render('default/investissement.html.twig', ['projects' => $projects,'tags' => $tags]);
 
+    }
+
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("search-property", name="search_property")
+     */
+    public function propertySearchAction(Request $request){
+        $em = $this->getDoctrine()->getManager();
+        $search = new PropertySearch();
+        $form = $this->createForm(PropertySearchType::class, $search);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted()){
+
+        }
+
+        return $this->render('default/search-property.html.twig', [
+            'form' => $form->createView(),
+            'search' => $search
+        ]);
     }
 
     /**

@@ -16,8 +16,8 @@
             <div class="flexslider project-slider">
                 <ul class="slides">
                     {% for image in project.images %}
-                        <li data-thumb="{{ image }}">
-                            <img src="{{ image }}" />
+                        <li data-thumb="{{ asset('uploads/' ~ image)  }}">
+                            <img src="{{ asset('uploads/' ~ image) }}" />
                         </li>
                     {% endfor %}
                 </ul>

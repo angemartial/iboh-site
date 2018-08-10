@@ -3216,3 +3216,19 @@ ul.side-list {
     margin-left: auto;
 
 }
+.find_home-box .price_filter{
+    width: 100%;
+}
+.price_slider_amount span {
+    float: left;
+    margin-right: 1rem;
+}
+.flexslider.property-slider {
+     margin-top: 0;
+     position: relative;
+     overflow: hidden;
+    margin-bottom: 2rem;
+}
+.property-slider .flex-viewport{
+    height: 30rem !important;
+}
