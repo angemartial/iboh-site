@@ -227,7 +227,7 @@
                                         </span>
                                         <div class="property-img">
                                             <a href="single-properties.html">
-                                                <img src="{% if property.images is not empty %} {{ property.images[0] }} {% else %} {{ asset('img/property/7.jpg') }} {% endif %}"
+                                                <img src="{% if property.images is not empty %} {{ asset('uploads/' ~ property.images[0])  }} {% else %} {{ asset('img/property/7.jpg') }} {% endif %}"
                                                      alt="">
                                             </a>
                                         </div>
