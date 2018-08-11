@@ -257,13 +257,8 @@ img{max-width: 100%}
 }
 .property-desc-top h4.price {
     color: #008000;
-    font-size: 20px;
+    font-size: 1rem;
     margin-bottom: 0;
-    position: absolute;
-    right: 18px;
-    top: 50%;
-    -webkit-transform: translateY(-50%);
-    transform: translateY(-50%);
 }
 .property-location > p {
     color: #eee;
@@ -1348,8 +1343,8 @@ img{max-width: 100%}
 }
 .pagination-inner li a:hover,.pagination-inner li.current{
     color: #fff;
-    background: #ffc400;
-    border-color: #ffc400;
+    background: rgb(0, 128, 0);
+    border-color: rgb(0, 128, 20);
 }
 .pagination-inner li {
   display: inline-block;

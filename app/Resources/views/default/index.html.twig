@@ -26,7 +26,7 @@
                                         </div>
                                         <div class="contact-us wow fadeUp" data-wow-duration="1.5s"
                                              data-wow-delay=".5s">
-                                            <a href="contact.html">CONTACTEZ-NOUS</a>
+                                            <a href="{{ path('contact') }}">CONTACTEZ-NOUS</a>
                                         </div>
                                     </div>
                                 </div>
@@ -52,7 +52,7 @@
                                         </div>
                                         <div class="contact-us wow fadeUp" data-wow-duration="1.5s"
                                              data-wow-delay=".5s">
-                                            <a href="contact.html">CONTACTEZ-NOUS</a>
+                                            <a href="{{ path('contact') }}">CONTACTEZ-NOUS</a>
                                         </div>
                                     </div>
                                 </div>
@@ -79,7 +79,7 @@
 
                                         <div class="contact-us wow fadeUp" data-wow-duration="1.5s"
                                              data-wow-delay=".5s">
-                                            <a href="contact.html">CONTACTEZ-NOUS</a>
+                                            <a href="{{ path('contact') }}">CONTACTEZ-NOUS</a>
                                         </div>
                                     </div>
                                 </div>
@@ -203,8 +203,7 @@
                 <div class="col-md-12">
                     <div class="property-tab-menu">
                         <ul class="nav" role="tablist">
-                            <li role="presentation" class="active"><a href="#sale" aria-controls="sale"
-                                                                      data-toggle="tab">Vente</a></li>
+                            <li role="presentation" class="active"><a href="#sale" aria-controls="sale" data-toggle="tab">Vente</a></li>
                             <li role="presentation"><a href="#rent" aria-controls="rent" data-toggle="tab">Location</a>
                             </li>
                         </ul>
@@ -215,7 +214,7 @@
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane active" id="sale">
                         <div class="property-list">
-                            {% for property in properties %}
+                            {% for property in properties if property.sale is not null %}
                                 <div class="col-md-4">
                                     <div class="single-property mb-40 fadeInUp wow" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
                                         <span>
@@ -234,24 +233,24 @@
                                         <div class="property-desc">
                                             <div class="property-desc-top">
                                                 <h6><a href="single-properties.html">{{ property.title }}</a></h6>
-                                                <h4 class="price">{% if property.sale is not null %}
-                                                        {{ property.sale.price }}
-                                                    {% else %}
-                                                        {{ property.rental.monthly }}
-                                                    {% endif %}
-                                                </h4>
                                                 <div class="property-location">
                                                     <p><img src="{{ asset('img/property/icon-5.png') }}"
                                                             alt=""> {{ property.subLocation }}
                                                         , {{ property.location.title }}</p>
                                                 </div>
+                                                <h4 class="price">{% if property.sale is not null %}
+                                                        {{ property.sale.price }} CFA
+                                                    {% else %}
+                                                        {{ property.rental.monthly }} CFA
+                                                    {% endif %}
+                                                </h4>
                                             </div>
                                             <div class="property-desc-bottom">
                                                 <div class="property-bottom-list">
                                                     <ul>
                                                         <li>
                                                             <img src="{{ asset('img/property/icon-1.png') }}" alt="">
-                                                            <span>{{ property.fieldSpace }}</span>
+                                                            <span>{{ property.fieldSpace }}</span> m²
                                                         </li>
                                                         <li>
                                                             <img src="{{ asset('img/property/icon-2.png') }}" alt="">
@@ -270,6 +269,65 @@
                             {% endfor %}
                         </div>
                     </div>
+                    <div role="tabpanel" class="tab-pane fade" id="rent">
+                        <div class="property-list">
+                            {% for property in properties if property.sale is null %}
+                                <div class="col-md-4">
+                                    <div class="single-property mb-40 fadeInUp wow" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                                        <span>
+                                            {% if property.sale is not null %}
+                                                EN VENTE
+                                            {% else %}
+                                                LOCATION
+                                            {% endif %}
+                                        </span>
+                                        <div class="property-img">
+                                            <a href="single-properties.html">
+                                                <img src="{% if property.images is not empty %} {{ asset('uploads/' ~ property.images[0])  }} {% else %} {{ asset('img/property/7.jpg') }} {% endif %}"
+                                                     alt="">
+                                            </a>
+                                        </div>
+                                        <div class="property-desc">
+                                            <div class="property-desc-top">
+                                                <h6><a href="single-properties.html">{{ property.title }}</a></h6>
+
+                                                <div class="property-location">
+                                                    <p><img src="{{ asset('img/property/icon-5.png') }}"
+                                                            alt=""> {{ property.subLocation }}
+                                                        , {{ property.location.title }}</p>
+                                                </div>
+                                                <h4 class="price">{% if property.sale is not null %}
+                                                        {{ property.sale.price }} CFA
+                                                    {% else %}
+                                                        {{ property.rental.monthly }} CFA / Mois
+                                                    {% endif %}
+                                                </h4>
+                                            </div>
+                                            <div class="property-desc-bottom">
+                                                <div class="property-bottom-list">
+                                                    <ul>
+                                                        <li>
+                                                            <img src="{{ asset('img/property/icon-1.png') }}" alt="">
+                                                            <span>{{ property.fieldSpace }}</span> m²
+                                                        </li>
+                                                        <li>
+                                                            <img src="{{ asset('img/property/icon-2.png') }}" alt="">
+                                                            <span>{{ property.bedroom }}</span>
+                                                        </li>
+                                                        <li>
+                                                            <img src="{{ asset('img/property/icon-3.png') }}" alt="">
+                                                            <span>{{ property.bathroom }}</span>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
                     {#<div role="tabpanel" class="tab-pane fade" id="rent">#}
                         {#<div class="property-list">#}
                             {#<div class="col-md-4">#}
@@ -514,6 +572,7 @@
                     {#</div>#}
                 {#</div>#}
             </div>
+        </div>
         </div>
     </div>
     <!--Feature property section end-->

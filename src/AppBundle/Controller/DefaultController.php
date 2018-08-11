@@ -176,7 +176,7 @@ class DefaultController extends Controller
      */
     public function pageProperty(request $request, $page = 1)
     {
-        $max = 2;
+        $max = 12;
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository(Property::class);
         $properties = $repository->loadProperties($max, $page);
