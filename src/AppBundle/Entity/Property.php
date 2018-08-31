@@ -92,6 +92,12 @@ class Property
     private $kitchen;
 
     /**
+     * @var bool
+     * @ORM\Column(name="published", type="boolean")
+     */
+    private $published = false;
+
+    /**
      * @var Location
      *
      * @ORM\ManyToOne(targetEntity="Location")
@@ -430,6 +436,26 @@ class Property
         $this->images = $images;
         return $this;
     }
+
+    /**
+     * @return bool
+     */
+    public function isPublished(): bool
+    {
+        return $this->published;
+    }
+
+    /**
+     * @param bool $published
+     * @return Property
+     */
+    public function setPublished(bool $published): Property
+    {
+        $this->published = $published;
+        return $this;
+    }
+
+    
 
 
 }

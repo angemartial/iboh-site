@@ -318,14 +318,14 @@ class DefaultController extends Controller
 
                 $message.= $posts['message'];
 
-                $message = (new \Swift_Message('Message de contact utilisateur ibohcompany.com'))
-                    ->setFrom(['test@ibohcompany.com' => 'Iboh Company'])
+                $message = (new \Swift_Message('Message de contact utilisateur immobilier.ibohcompany.com'))
+                    ->setFrom(['test@ibohcompany.com' => 'Immobilier-Iboh'])
                     ->setTo(['angemartialkoffi@gmail.com' => 'Ange Martial Koffi', 'angemartialkoffi@outlook.fr' => 'Ange Martial Koffi'])
                     ->setBody($message);
 
                 $mailer->send($message);
 
-                $this->addFlash('Votre message a été envoyé avec succes');
+                $this->addFlash('success','Votre message a été envoyé avec succes');
             }
 
         }
