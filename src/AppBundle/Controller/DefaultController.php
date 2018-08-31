@@ -96,6 +96,8 @@ class DefaultController extends Controller
 
         $type = $em->getRepository(Type::class)->find($posts['type']);
         $property->setType($type);
+
+        //
         $convenienceRepository = $em->getRepository(Convenience::class);
 
         foreach ($posts['conveniences'] as $convenienceId) {
@@ -262,11 +264,72 @@ class DefaultController extends Controller
         return $this->render('default/add-project.html.twig', ['tags' => $tags]);
     }
 
+    private function verifyCaptcha($captchaResponse){
+        $url = "https://www.google.com/recaptcha/api/siteverify";
+        $posts = [
+            'response' => $captchaResponse,
+            'secret' => "6Lfpm20UAAAAAJ8OgPX9ucz1MRKdrVg73_BkIVjc",
+            'remoteip' => $_SERVER["REMOTE_ADDR"]
+        ];
+
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $posts);
+
+        $response = curl_exec($ch);
+
+        if(curl_errno($ch)){
+            return false;
+        }
+
+
+        $result = json_decode($response, true);
+
+        return true === $result['success'];
+    }
+
     /**
      * @Route("/contact", name="contact")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function contactAction(request $request)
+    public function contactAction(Request $request)
     {
+
+        if($request->getMethod() === 'POST'){
+            $posts = $request->request->all();
+
+            $posts = $this->cleanAll($posts);
+            $verify = $this->verifyCaptcha($posts['g-recaptcha-response']);
+            if(false === $verify){
+                $this->addFlash('danger', 'Les robots sont à tuer :) ');
+            }
+            if( $this->checkRequired($posts) && $verify){
+                $mailer = $this->get('mailer');
+                $message = 'Vous venez de recevoir un message de :'.PHP_EOL;
+
+                $message.= ( 'Nom : ' . $posts['name'].PHP_EOL.PHP_EOL );
+
+                $message.= ( 'Email : ' . $posts['email'].PHP_EOL.PHP_EOL );
+
+                $message.= ( 'Message : '.PHP_EOL.PHP_EOL );
+
+                $message.= $posts['message'];
+
+                $message = (new \Swift_Message('Message de contact utilisateur ibohcompany.com'))
+                    ->setFrom(['test@ibohcompany.com' => 'Iboh Company'])
+                    ->setTo(['angemartialkoffi@gmail.com' => 'Ange Martial Koffi', 'angemartialkoffi@outlook.fr' => 'Ange Martial Koffi'])
+                    ->setBody($message);
+
+                $mailer->send($message);
+
+                $this->addFlash('Votre message a été envoyé avec succes');
+            }
+
+        }
+
         return $this->render('default/contact.html.twig');
     }
 
@@ -276,6 +339,18 @@ class DefaultController extends Controller
     public function projectsAction(request $request)
     {
         return $this->render('default/projects.html.twig');
+    }
+
+    function checkRequired(array $posts = []){
+        $required = ['name', 'email', 'message', 'g-recaptcha-response'];
+
+        foreach ($required as $name ) {
+            if(false === array_key_exists($name, $posts)  || empty($posts[$name])){
+                $this->addFlash('danger', 'Veuillez remplir le champs ' .$name);
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
@@ -493,6 +568,8 @@ class DefaultController extends Controller
         return $this->redirectToRoute('detail_project', ['id' => $project->getId()]);
 
     }
+
+
 
 }
 

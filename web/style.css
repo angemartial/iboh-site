@@ -390,6 +390,9 @@ img{max-width: 100%}
     font-size: medium;
     color: black;
 }
+.top-bar-row {
+    background-color: white;
+}
 .welcome-content > p span {
     color: #008000;
     font-size: 16px;

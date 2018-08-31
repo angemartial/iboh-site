@@ -20,7 +20,7 @@ NOTE: This is Header style file. All Header related style included in this file.
   font-family: "Poppins",sans-serif;
   font-size: 15px;
   font-weight: 500;
-  padding: 35px 0;
+  padding: 25px 0;
   text-transform: uppercase;
 }
 .header-menu ul li:hover a {
@@ -77,13 +77,13 @@ NOTE: This is Header style file. All Header related style included in this file.
   background: inherit;
 }
 .logo > a {
-  background: #ffffff none repeat scroll 0 0;
-  display: inherit;
-  height: 150px;
-  position: relative;
-  text-align: center;
-  width: 150px;
-  z-index: 999;
+    background: #ffffff none repeat scroll 0 0;
+    display: inherit;
+    height: 110px;
+    position: relative;
+    text-align: center;
+    width: 100px;
+    z-index: 999;
 }
 /*------------
     Header top bar css here
@@ -170,8 +170,13 @@ NOTE: This is Header style file. All Header related style included in this file.
     color: #303030;
     font-weight: 400;
 }
+.header-topbar-menu ul {
+    text-align: right;
+    padding: 0.5rem;
+}
 .header-topbar-menu ul li {
-    margin-right: 65px;
+    display: inline;
+    margin-left: 1rem;
 }
 .header-topbar-menu span {
     display: inline-block;
@@ -386,8 +391,8 @@ NOTE: This is Header style file. All Header related style included in this file.
 }
 
 .logo img {
-  margin-top: 15px;
-  width: 80px;
+    margin-top: 15px;
+    width: 60px;
 }
 
 
