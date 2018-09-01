@@ -22,6 +22,8 @@ class PropertyRepository extends \Doctrine\ORM\EntityRepository
         $qb = $this->createQueryBuilder('p')
             ->setFirstResult(($page - 1) * $max)
             ->orderBy('p.id', 'DESC')
+            ->where('p.published = :published')
+            ->setParameter('published', true)
             ->setMaxResults($max);
 
         return new Paginator($qb);

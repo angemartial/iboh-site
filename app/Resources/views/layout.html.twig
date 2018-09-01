@@ -71,18 +71,20 @@
                                         <ul>
                                             <li><a href="{{ path('index') }}">Accueil</a></li>
                                             <li><a href="{{ path('property') }}">Nos offres</a>
-                                                {#<ul class="dropdown_menu">#}
-                                                {#<li><a href="#"> A louer </a></li>#}
-                                                {#<li><a href="#">En vente</a></li>#}
-                                                {#</ul>#}
-
+                                                <ul class="dropdown_menu">
+                                                <li><a href="#"> A louer </a></li>
+                                                <li><a href="#">En vente</a></li>
+                                                </ul>
+                                            <li><a href="{{ path('property') }}">Propriétés</a>
                                             </li>
-                                            <li><a href="#">Projets immobiliers</a></li>
+                                            <li><a href="#">Projets immobiliers</a>
                                                 {#<ul class="dropdown_menu">#}
-                                                     {#<li><a href="#"> Promotion immobilière </a></li>#}
-                                                     {#<li><a href="#">Construction</a></li>#}
+                                                    {#<li><a href="#"> Promotion immobilière </a></li>#}
+                                                    {#<li><a href="#">Construction</a></li>#}
                                                     {#<li><a href="#">Transformation & Rénovation</a></li>#}
                                                 {#</ul>#}
+                                            </li>
+
 
                                             <li><a href="{{ path('contact') }}"> Contactez-nous</a></li>
                                         </ul>
@@ -99,17 +101,23 @@
                         <div class="col-md-12">
                             <nav id="dropdown">
                                 <ul>
-                                    <li><a href="{{ path('index') }}">Accueil</a>
-                                        <ul>
+                                    <li><a href="{{ path('index') }}">Accueil</a></li>
+                                    <li><a href="{{ path('property') }}">Nos offres</a>
+                                        <ul class="dropdown_menu">
+                                            <li><a href="#"> A louer </a></li>
+                                            <li><a href="#">En vente</a></li>
                                         </ul>
-                                    </li>
-                                    <li><a href="#">Achetez</a></li>
-                                    <li><a href="#"> Louez</a>
-                                        <ul>
-                                        </ul>
-                                    </li>
                                     <li><a href="{{ path('property') }}">Propriétés</a>
                                     </li>
+                                    <li><a href="#">Projets immobiliers</a>
+                                        {#<ul class="dropdown_menu">#}
+                                        {#<li><a href="#"> Promotion immobilière </a></li>#}
+                                        {#<li><a href="#">Construction</a></li>#}
+                                        {#<li><a href="#">Transformation & Rénovation</a></li>#}
+                                        {#</ul>#}
+                                    </li>
+
+
                                     <li><a href="{{ path('contact') }}"> Contactez-nous</a></li>
                                 </ul>
                             </nav>
@@ -162,18 +170,20 @@
             <div class="footer-bottom">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-7 col-sm-12 col-xs-12">
+                        <div class="col-md-8 col-sm-12 col-xs-12">
                             <div class="footer-menu">
                                 <ul>
                                     <li><a href="{{ path('index')}}">Accueil</a></li>
                                     <li><a href="#">Achetez</a></li>
                                     <li><a href="#">Louez</a></li>
+                                    <li><a href="#">Vendez</a></li>
                                     <li><a href="{{ path('property') }}">Propriétés</a>
+                                    <li><a href="#">Projets immobiliers</a></li>
                                     <li><a href="{{ path('contact') }}">Contactez-nous </a></li>
                                 </ul>
                             </div>
                         </div>
-                        <div class="col-md-5 col-sm-12 col-xs-12">
+                        <div class="col-md-4 col-sm-12 col-xs-12">
                             <div class="copyright">
                                 <p>Copyright <i class="fa fa-copyright"></i> 2018 <a href="#">Iboh Company</a></p>
                             </div>
