@@ -38,6 +38,7 @@
             <div class="header-top sticky-header">
                 <div class="row top-bar-row">
                     <div class="container">
+                       <a href="#"><i class="fa fa-facebook-square"></i></a>
                         <div class="header-topbar-menu pull-right">
                             <ul>
                                 <li><a href="#"></a></li>
@@ -72,12 +73,12 @@
                                             <li><a href="{{ path('index') }}">Accueil</a></li>
                                             <li><a href="{{ path('property') }}">Nos offres</a>
                                                 <ul class="dropdown_menu">
-                                                <li><a href="#"> A louer </a></li>
-                                                <li><a href="#">En vente</a></li>
+                                                <li><a href="{{ path('property', { 'type': 'location' }) }}"> A louer </a></li>
+                                                <li><a href="{{ path('property', { 'type': 'vente' }) }}">En vente</a></li>
+                                                <li><a href="{{ path('add_property') }}">Ajouter un bien</a></li>
                                                 </ul>
-                                            <li><a href="{{ path('property') }}">Propriétés</a>
                                             </li>
-                                            <li><a href="#">Projets immobiliers</a>
+                                            <li><a href="{{ path('investissement') }}">Projets immobiliers</a>
                                                 {#<ul class="dropdown_menu">#}
                                                     {#<li><a href="#"> Promotion immobilière </a></li>#}
                                                     {#<li><a href="#">Construction</a></li>#}
@@ -106,10 +107,10 @@
                                         <ul class="dropdown_menu">
                                             <li><a href="#"> A louer </a></li>
                                             <li><a href="#">En vente</a></li>
+                                            <li><a href="{{ path('add_property') }}">Ajouter un bien</a></li>
                                         </ul>
-                                    <li><a href="{{ path('property') }}">Propriétés</a>
                                     </li>
-                                    <li><a href="#">Projets immobiliers</a>
+                                    <li><a href="{{ path('investissement') }}">Projets immobiliers</a>
                                         {#<ul class="dropdown_menu">#}
                                         {#<li><a href="#"> Promotion immobilière </a></li>#}
                                         {#<li><a href="#">Construction</a></li>#}
@@ -133,9 +134,9 @@
                         <div class="row">
                             <div class="col-md-12 col-sm-12 col-xs-12">
 
-                                <div class="add-property">
-                                    <a href="{{ path('add_property') }}">Ajouter une propriété</a>
-                                </div>
+                                {#<div class="add-property">#}
+                                    {#<a href="{{ path('add_property') }}">Ajouter une propriété</a>#}
+                                {#</div>#}
                                 <div class="add-property">
                                     <a href="{{ path('add_project') }}">Ajouter un projet</a>
                                 </div>
@@ -176,9 +177,8 @@
                                     <li><a href="{{ path('index')}}">Accueil</a></li>
                                     <li><a href="#">Achetez</a></li>
                                     <li><a href="#">Louez</a></li>
-                                    <li><a href="#">Vendez</a></li>
-                                    <li><a href="{{ path('property') }}">Propriétés</a>
-                                    <li><a href="#">Projets immobiliers</a></li>
+                                    <li><a href="{{ path('add_property') }}">Ajouter un bien</a></li>
+                                    <li><a href="{{ path('investissement') }}">Projets immobiliers</a></li>
                                     <li><a href="{{ path('contact') }}">Contactez-nous </a></li>
                                 </ul>
                             </div>

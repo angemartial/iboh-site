@@ -122,6 +122,7 @@ class User extends BaseUser
         $this -> enabled        = false;
         $this -> roles          = [];
         $this -> lastActionDate = new \DateTime();
+
     }
     
     /**

@@ -5,128 +5,17 @@
         <img src="{{ asset('img/page-title-background.jpg') }}" alt="title background">
         <div class="title-group">
             <div class="row">
-                <h1>Propriétés</h1>
+                {% if type is defined %}
+                    <h1>Nos {% if type == 'location' %} locations {% elseif type == 'vente' %} ventes {% else %} offres {% endif %}  disponibles </h1>
+                {% else %}
+                    <h1>Nos offres disponibles </h1>
+                {% endif %}
+
             </div>
 
         </div>
     </div>
-    <!--Find home area start-->
-    {#
-    <div class="find-home">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="find-home-title">
-                        <h3>TROUVER VOTRE MAISON DE REVE</h3>
-                    </div>
-                </div>
-
-                <form action="#">
-                    <div class="col-md-3 col-sm-4 col-xs-12">
-                        <div class="find-home-item custom-select mb-40">
-                            <select class="selectpicker" title="Location" data-hide-disabled="true" data-live-search="true">
-                                <optgroup disabled="disabled" label="disabled">
-                                    <option>Hidden</option>
-                                </optgroup>
-                                <optgroup label="Australia">
-                                    <option>Sydney</option>
-                                    <option>Melbourne</option>
-                                    <option>Cairns</option>
-                                </optgroup>
-                                <optgroup label="USA">
-                                    <option>South Carolina</option>
-                                    <option>Florida</option>
-                                    <option>Rhode Island</option>
-                                </optgroup>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-4 col-xs-12">
-                        <div class="find-home-item custom-select">
-                            <select class="selectpicker" title="Sub - Location" data-hide-disabled="true" data-live-search="true">
-                                <optgroup disabled="disabled" label="disabled">
-                                    <option>Hidden</option>
-                                </optgroup>
-                                <optgroup label="Australia">
-                                    <option>southeastern coast</option>
-                                    <option>southeastern tip</option>
-                                    <option>northwest corner</option>
-                                </optgroup>
-                                <optgroup label="USA">
-                                    <option>Charleston</option>
-                                    <option>St. Petersburg</option>
-                                    <option>Newport</option>
-                                </optgroup>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-4 col-xs-12">
-                        <div class="find-home-item mb-40">
-                            <input type="text" name="min-area" placeholder="Min area (sqft)">
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-4 col-xs-12">
-                        <div class="find-home-item mb-40">
-                            <input type="text" name="max-area" placeholder="Max area (sqft)">
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-4 col-xs-12">
-                        <div class="find-home-item  custom-select">
-                            <select class="selectpicker" title="No. of Beadrooms" data-hide-disabled="true">
-                                <optgroup  label="1">
-                                    <option label="1">1 Beadrooms</option>
-                                    <option>2 Beadrooms</option>
-                                    <option>3 Beadrooms</option>
-                                    <option>4 Beadrooms</option>
-                                    <option>5 Beadrooms</option>
-                                </optgroup>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-4 col-xs-12">
-                        <div class="find-home-item custom-select">
-                            <select class="selectpicker" title="No. of Bathrooms" data-hide-disabled="true">
-                                <optgroup label="2">
-                                    <option>1 Bathrooms</option>
-                                    <option>2 Bathrooms</option>
-                                    <option>3 Bathrooms</option>
-                                    <option>4 Bathrooms</option>
-                                    <option>5 Bathrooms</option>
-                                </optgroup>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-sm-12 col-xs-12">
-                        <div class="row">
-                            <div class="col-sm-7 col-xs-12">
-                                <div class="find-home-item">
-                                    <!-- shop-filter -->
-                                    <div class="shop-filter">
-                                        <div class="price_filter">
-                                            <div class="price_slider_amount">
-                                                <input type="submit"  value="price range"/>
-                                                <input type="text" id="amount" name="price"  placeholder="Add Your Price" />
-                                            </div>
-                                            <div id="slider-range"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-5 col-xs-12">
-                                <div class="find-home-item">
-                                    <button type="submit">SEARCH PROPERTY </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>#}
-    <!--Find home area end-->
-
-
-    <!--property list-->
+   <!--property list-->
     <div class="feature-property pt-50">
         {% if isSearch %}
             <h2 class="container pb-20">Resultat de la recherche</h2>

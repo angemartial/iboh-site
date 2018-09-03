@@ -30,7 +30,7 @@
                     <div class="col-md-3 col-sm-4 col-xs-12 cbp-item {% for tag in project.tags %} {{ tag.title|lower|replace({' ': '-'}) }} {% endfor %}">
                         <div class="single_property mb-30">
                             <div class="single_propert_img">
-                                <img src="{{ project.images[0] }}" alt="">
+                                <img src="{{ asset('uploads/' ~ project.images[0])  }}" alt="">
                             </div>
                             <div class="single_property-text">
                                 <div class="single_property_inner">

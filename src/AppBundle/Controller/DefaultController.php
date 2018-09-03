@@ -10,7 +10,7 @@ use AppBundle\Entity\Rental;
 use AppBundle\Entity\Sale;
 use AppBundle\Entity\Tag;
 use AppBundle\Entity\Type;
-use AppBundle\Entity\User;
+use Dup\UserBundle\Entity\User;
 use AppBundle\Extra\PropertySearch;
 use AppBundle\Form\PropertySearchType;
 use Dup\UserBundle\DupUserBundle;
@@ -19,6 +19,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\PropertyAccess\PropertyAccess;
 
 class DefaultController extends Controller
 {
@@ -171,21 +172,22 @@ class DefaultController extends Controller
 
 
     /**
-     * @Route("/proprietes/{page}", name="property")
+     * @Route("/proprietes/{type}/{page}", name="property")
      * @param Request $request
      * @param int $page
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function pageProperty(request $request, $page = 1)
+    public function pageProperty(request $request, $type = null, $page = 1)
     {
+
         $max = 12;
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository(Property::class);
-        $properties = $repository->loadProperties($max, $page);
-        return $this->render('default/property.html.twig', ['properties' => $properties, 'page' => $page, 'max' => $max, 'isSearch' => false]);
+        $properties = $repository->loadProperties($max, $type, $page);
+        return $this->render('default/property.html.twig', ['properties' => $properties, 'type' => $type, 'page' => $page, 'max' => $max, 'isSearch' => false]);
     }
 
-    /**
+     /**
      * @Route("/inscription", name="register")
      */
     public function registerAction(request $request)
@@ -354,6 +356,38 @@ class DefaultController extends Controller
     }
 
     /**
+     * @param Request $request
+     * @Route("/update-user", name="update_user")
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function updateUserAction(Request $request){
+        $posts = $request->request->all();
+        $posts = $this->cleanAll($posts);
+        $manager = $this->get('fos_user.user_manager');
+        $accessor = PropertyAccess::createPropertyAccessor();
+        /** @var User $user */
+        $user = $this->getUser();
+        if(array_key_exists('plainPassword', $posts)){
+            if(false === array_key_exists('confirm', $posts) || false === array_key_exists('former', $posts)){
+                $this->addFlash('danger', 'Merci de renseigner tous les champs pour modifier le mot de pass');
+            }else{
+                if(true === $this->checkPassword($posts)){
+                    $user->setPlainPassword($posts['plainPassword']);
+                    $manager->updateUser($user);
+                    $this->addFlash('success', 'Le mot de passe a été mis à jour avec succès');
+                }
+            }
+        }else{
+            foreach ($posts as $property => $value) {
+                $accessor->setValue($user, $property, $value);
+            }
+            $manager->updateUser($user);
+            $this->addFlash('success', 'L\'utilisateur a été mis à jour avec succès');
+        }
+        return $this->redirectToRoute('myaccount', ['username' => $user->getUsername()]);
+    }
+
+    /**
      * @Route("/profile/{username}", name="myaccount")
      */
     public function myAccountAction(request $request, $username)
@@ -371,8 +405,6 @@ class DefaultController extends Controller
      */
     public function saveUserAction(request $request)
     {
-        $em = $this->getDoctrine()->getManager();
-
         $posts = $request->request->all();
         $posts = $this->cleanAll($posts);
 
@@ -382,16 +414,15 @@ class DefaultController extends Controller
 
         $user = new User();
         $user->setEmail($posts['email']);
-        $user->setPassword(hash('sha512', $posts['password']));
+        $user->setPlainPassword($posts['password']);
         $user->setUsername($posts['username']);
         $user->setLastname($posts['nom']);
         $user->setFirstname($posts['prenoms']);
-
-
+        $user->setEnabled(true);
+        $manager = $this->get('fos_user.user_manager');
+        $manager->updateUser($user);
         $user->setPhone($posts['phone']);
 
-        $em->persist($user);
-        $em->flush();
         $this->addFlash('success', 'Vous avez été enregistré avec success');
         return $this->redirectToRoute('myaccount', ['username' => $user->getUsername()]);
 
@@ -399,7 +430,7 @@ class DefaultController extends Controller
 
     private function check(array $posts){
         /* On verifie que les données obligatoires sont presentes */
-        $required = ['username', 'email', 'password', 'confirm', 'phone'];
+        $required = ['username', 'email', 'plainPassword', 'confirm', 'phone'];
         foreach ($required as $post) {
             if( false === array_key_exists($post, $posts) || empty( $posts[$post] ) ){
                 $this->addFlash('danger', 'La case '.$post.' ne peut pas être vide');
@@ -435,6 +466,9 @@ class DefaultController extends Controller
             return false;
         }
 
+        if( false === $this->checkPassword($posts)){
+            return false;
+        }
 
         /* On verifie que l'email est correcte */
         if (!filter_var($posts['email'], FILTER_VALIDATE_EMAIL)) {
@@ -442,11 +476,7 @@ class DefaultController extends Controller
             return false;
         }
 
-        /* on verifie que le mot de passe et la confirmation ne sont pas different */
-        if($posts['password'] !== $posts['confirm']){
-            $this->addFlash('danger', 'les mots de passes saisis ne correspondent pas');
-            return false;
-        }
+
 
         /* On verifie si l'utilisateur a accepté les cgu */
         if(false === array_key_exists('accepter', $posts)){
@@ -454,18 +484,28 @@ class DefaultController extends Controller
             return false;
         }
 
-        /* on verifie que le mot de passe est correct */
-        $uppercase = preg_match('@[A-Z]@', $posts['password']);
-        $lowercase = preg_match('@[a-z]@', $posts['password']);
-        $number    = preg_match('@[0-9]@', $posts['password']);
+        return true;
 
-        if(!$uppercase || !$lowercase || !$number || strlen($posts['password']) < 8) {
+    }
+
+    private function checkPassword($posts){
+        /* on verifie que le mot de passe et la confirmation ne sont pas different */
+        if($posts['plainPassword'] !== $posts['confirm']){
+            $this->addFlash('danger', 'les mots de passes saisis ne correspondent pas');
+            return false;
+        }
+
+        /* on verifie que le mot de passe est correct */
+        $uppercase = preg_match('@[A-Z]@', $posts['plainPassword']);
+        $lowercase = preg_match('@[a-z]@', $posts['plainPassword']);
+        $number    = preg_match('@[0-9]@', $posts['plainPassword']);
+
+        if(!$uppercase || !$lowercase || !$number || strlen($posts['plainPassword']) < 8) {
             $this->addFlash('danger', 'Le mot de passe doit contenir: au moins une lettre majuscule, une lettre minuscule, un chiffre et doit faire au moins 8 caracteres');
             return false;
         }
 
         return true;
-
     }
 
     /**

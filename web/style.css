@@ -375,6 +375,9 @@ img{max-width: 100%}
 .welcome-title .title-1 span,.welcome-title .title-2 span {
     color: #008000;
 }
+.title-2 > h1 h2 h3{
+    color: white;
+}
 .welcome-title .title-2 {
   color: #004395;
   font-size: 22px;
@@ -508,12 +511,13 @@ img{max-width: 100%}
     margin-bottom: 18px;
 }
 .section-title p {
-  color: #606060;
+  color:#000000;
   font-weight: 300;
-  margin: 0;
+  margin: auto;
 }
 .section-title {
   margin-bottom: 57px;
+    text-align: center;
 }
 .single-services-desc {
   margin-top: 24px;
@@ -1083,11 +1087,12 @@ img{max-width: 100%}
 ---------------*/
 /*Slider css*/
 .find-home-box.postion {
-  position: absolute;
-  right: 20%;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-  transform: translateY(-50%);
+    position: absolute;
+    right: 20%;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    margin-top: 3rem;
 }
 .find-home-box {
   background: rgba(0, 67, 149, 0.7) none repeat scroll 0 0;
@@ -1384,6 +1389,18 @@ img{max-width: 100%}
     padding-bottom: 10px;
     position: relative;
     text-transform: capitalize;
+}
+.aside-title h3 {
+    color: white;
+    line-height: 30px;
+    margin: 0;
+    padding-bottom: 10px;
+    text-align: center;
+    position: relative;
+    text-transform: capitalize;
+}
+.display-table{
+    text-align: left;
 }
 .aside-title {
     margin-bottom: 30px;
