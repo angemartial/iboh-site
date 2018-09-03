@@ -72,9 +72,9 @@
 .boxed-layout.fixed {
   margin: 70px 0;
 }
-.pattern-fixed.pattern {
-  background: url("images/bg/pattern.png") repeat fixed 0 0;
-}
+/*.pattern-fixed.pattern {*/
+  /*background: url("images/bg/pattern.png") repeat fixed 0 0;*/
+/*}*/
 
 img{max-width: 100%}
   
@@ -530,7 +530,7 @@ img{max-width: 100%}
 .single-services h5 {
     color: #303030;
     text-transform: capitalize;
-    text-align: center;s
+    text-align: center;
 }
 /*----------------------------
     07. Feature property css here
@@ -1224,10 +1224,10 @@ img{max-width: 100%}
   overflow: hidden;
   position: relative;
 }
-.single_property:hover .single_property-text {
-    -webkit-animation: 700ms ease-in-out 0.1s normal none 1 running flipInY;
-    animation: 700ms ease-in-out 0.1s normal none 1 running flipInY;
-}
+/*.single_property:hover .single_property-text {*/
+    /*-webkit-animation: 700ms ease-in-out 0.1s normal none 1 running flipInY;*/
+    /*animation: 700ms ease-in-out 0.1s normal none 1 running flipInY;*/
+/*}*/
 .single_property-text {
   background: rgba(0, 67, 149, 0.7) none repeat scroll 0 0;
   bottom: 43px;
@@ -2619,7 +2619,7 @@ article blockquote {
     font-size: 13px;
     height: 42px;
     margin-bottom: 15px;
-    padding-left: 36px;
+    padding-left: 3rem;
     text-transform: capitalize;
 }
 
@@ -2854,12 +2854,12 @@ article blockquote {
     31. Welcome fixd text css here
 ---------------*/
 .welcome-fixed-area{
-  background: url(img/slider/3.jpg)no-repeat scroll center center / cover;
+  background: url(img/slider/5.jpg)no-repeat scroll center center / cover;
   position: relative;
   height: 700px;
 }
 .welcome-fixed-area.parallax{
-    background: url(img/slider/3.jpg)no-repeat fixed center center / cover;
+    background: url(img/slider/5.jpg)no-repeat fixed center center / cover;
 }
 .welcome-fixed-area.youtube-bg{
     background: url(img/slider/5.jpg)no-repeat fixed center center / cover;
