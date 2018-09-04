@@ -518,7 +518,7 @@ class DefaultController extends Controller
         $projects = $em->getRepository(Project::class)->findAll();
         $tags = $em->getRepository(Tag::class)->findAll();
 
-        return $this->render('default/investissement.html.twig', ['projects' => $projects,'tags' => $tags]);
+        return $this->render(':default:investissement.html.twig', ['projects' => $projects,'tags' => $tags]);
 
     }
 
