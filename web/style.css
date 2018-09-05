@@ -2620,7 +2620,7 @@ article blockquote {
     height: 42px;
     margin-bottom: 15px;
     padding-left: 3rem;
-    text-transform: capitalize;
+    text-transform: none;
 }
 
 .register-page-form .username, .register-page-form .email, .register-page-form .password {
