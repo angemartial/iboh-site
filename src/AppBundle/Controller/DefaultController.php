@@ -322,7 +322,7 @@ class DefaultController extends Controller
 
                 $message = (new \Swift_Message('Message de contact utilisateur immobilier.ibohcompany.com'))
                     ->setFrom(['test@ibohcompany.com' => 'Immobilier-Iboh'])
-                    ->setTo(['angemartialkoffi@gmail.com' => 'Ange Martial Koffi', 'angemartialkoffi@outlook.fr' => 'Ange Martial Koffi'])
+                    ->setTo(['eric997997@gmail.com' => 'Eric Léonard', 'angemartialkoffi@gmail.com' => 'Ange Martial Koffi'])
                     ->setBody($message);
 
                 $mailer->send($message);
@@ -362,6 +362,7 @@ class DefaultController extends Controller
      */
     public function updateUserAction(Request $request){
         $posts = $request->request->all();
+
         $posts = $this->cleanAll($posts);
         $manager = $this->get('fos_user.user_manager');
         $accessor = PropertyAccess::createPropertyAccessor();
@@ -414,7 +415,7 @@ class DefaultController extends Controller
 
         $user = new User();
         $user->setEmail($posts['email']);
-        $user->setPlainPassword($posts['password']);
+        $user->setPlainPassword($posts['plainPassword']);
         $user->setUsername($posts['username']);
         $user->setLastname($posts['nom']);
         $user->setFirstname($posts['prenoms']);
@@ -432,7 +433,7 @@ class DefaultController extends Controller
         /* On verifie que les données obligatoires sont presentes */
         $required = ['username', 'email', 'plainPassword', 'confirm', 'phone'];
         foreach ($required as $post) {
-            if( false === array_key_exists($post, $posts) || empty( $posts[$post] ) ){
+            if( false === array_key_exists($post, $posts) && empty( $posts[$post] ) ){
                 $this->addFlash('danger', 'La case '.$post.' ne peut pas être vide');
 
                 return false;

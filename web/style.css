@@ -2620,9 +2620,7 @@ article blockquote {
     height: 42px;
     margin-bottom: 15px;
     padding-left: 3rem;
-    text-transform: none;
 }
-
 .register-page-form .username, .register-page-form .email, .register-page-form .password {
     position: relative;
 }
@@ -2866,7 +2864,7 @@ article blockquote {
 }
 
 .dotted-overlay::after {
-  background: url("img/icon/grid.png") repeat scroll 0 0;
+  /*background: url("img/icon/grid.png") repeat scroll 0 0;*/
   content: "";
   height: 100%;
   left: 0;

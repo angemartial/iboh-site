@@ -82,6 +82,7 @@ class User
      */
     private $password;
 
+
     /**
      * @var boolean
      *
@@ -106,7 +107,7 @@ class User
      * @param int $id
      * @return User
      */
-    public function setId(int $id): User
+    public function setId(int $id)
     {
         $this->id = $id;
         return $this;
@@ -115,7 +116,7 @@ class User
     /**
      * @return string
      */
-    public function getUsername(): string
+    public function getUsername()
     {
         return $this->username;
     }
@@ -124,7 +125,7 @@ class User
      * @param string $username
      * @return User
      */
-    public function setUsername(string $username): User
+    public function setUsername(string $username)
     {
         $this->username = $username;
         return $this;
@@ -133,7 +134,7 @@ class User
     /**
      * @return string
      */
-    public function getLastname(): string
+    public function getLastname()
     {
         return $this->lastname;
     }
@@ -142,7 +143,7 @@ class User
      * @param string $lastname
      * @return User
      */
-    public function setLastname(string $lastname): User
+    public function setLastname(string $lastname)
     {
         $this->lastname = $lastname;
         return $this;
@@ -151,7 +152,7 @@ class User
     /**
      * @return string
      */
-    public function getFirstname(): string
+    public function getFirstname()
     {
         return $this->firstname;
     }
@@ -160,7 +161,7 @@ class User
      * @param string $firstname
      * @return User
      */
-    public function setFirstname(string $firstname): User
+    public function setFirstname(string $firstname)
     {
         $this->firstname = $firstname;
         return $this;
@@ -169,7 +170,7 @@ class User
     /**
      * @return string
      */
-    public function getPhone(): string
+    public function getPhone()
     {
         return $this->phone;
     }
@@ -178,7 +179,7 @@ class User
      * @param string $phone
      * @return User
      */
-    public function setPhone(string $phone): User
+    public function setPhone(string $phone)
     {
         $this->phone = $phone;
         return $this;
@@ -187,7 +188,7 @@ class User
     /**
      * @return string
      */
-    public function getEmail(): string
+    public function getEmail()
     {
         return $this->email;
     }
@@ -196,7 +197,7 @@ class User
      * @param string $email
      * @return User
      */
-    public function setEmail(string $email): User
+    public function setEmail(string $email)
     {
         $this->email = $email;
         return $this;
@@ -214,7 +215,7 @@ class User
      * @param string $statut
      * @return User
      */
-    public function setStatut(string $statut): User
+    public function setStatut(string $statut)
     {
         $this->statut = $statut;
         return $this;
@@ -223,7 +224,7 @@ class User
     /**
      * @return string
      */
-    public function getPassword(): string
+    public function getPassword()
     {
         return $this->password;
     }
@@ -232,7 +233,7 @@ class User
      * @param string $password
      * @return User
      */
-    public function setPassword(string $password): User
+    public function setPassword(string $password)
     {
         $this->password = $password;
         return $this;
@@ -241,7 +242,7 @@ class User
     /**
      * @return bool
      */
-    public function isNewsletter(): bool
+    public function isNewsletter()
     {
         return $this->newsletter;
     }
@@ -250,7 +251,7 @@ class User
      * @param bool $newsletter
      * @return User
      */
-    public function setNewsletter(bool $newsletter): User
+    public function setNewsletter(bool $newsletter)
     {
         $this->newsletter = $newsletter;
         return $this;
