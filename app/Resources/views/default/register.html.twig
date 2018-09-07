@@ -10,12 +10,23 @@
                         <div class="account-title">
                             <h5>Inscription</h5>
                         </div>
+                        {% set sessionStorage = app.session.get("inscription") %}
                         <form action="{{ url('save_user') }}" method="post">
                             <div class="col-md-6 username">
-                                <input type="text" placeholder="Nom Utilisateur" name="username">
+
+                                <input type="text" placeholder="Nom Utilisateur" name="username"
+
+                                    {% if sessionStorage is defined and sessionStorage['username'] is defined %}
+                                        value="{{ sessionStorage['username'] }}"
+                                    {% endif %}
+                                >
                             </div>
                             <div class="col-md-6 email">
-                                <input type="email" placeholder="Email" name="email">
+                                <input type="email" placeholder="Email" name="email"
+                                        {% if sessionStorage is defined and sessionStorage['email'] is defined %}
+                                            value="{{ sessionStorage['email'] }}"
+                                        {% endif %}
+                                >
                             </div>
                             <div class="col-md-6 password">
                                 <input type="password" placeholder="Mot de passe" name="plainPassword">
@@ -25,15 +36,27 @@
                             </div>
                             <div class="col-md-6">
                                 <i class="icofont icofont-business-man"></i>
-                                <input type="text" placeholder="Nom" name="nom">
+                                <input type="text" placeholder="Nom" name="nom"
+                                        {% if sessionStorage is defined and sessionStorage['nom'] is defined %}
+                                            value="{{ sessionStorage['nom'] }}"
+                                        {% endif %}
+                                >
                             </div>
                             <div class="col-md-6">
                                 <i class="icofont icofont-business-man"></i>
-                                <input type="text" placeholder="Prenoms" name="prenoms">
+                                <input type="text" placeholder="Prenoms" name="prenoms"
+                                        {% if sessionStorage is defined and sessionStorage['prenoms'] is defined %}
+                                            value="{{ sessionStorage['prenoms'] }}"
+                                        {% endif %}
+                                >
                             </div>
                             <div class="col-md-6">
                                 <i class="icofont icofont-ui-call"></i>
-                                <input type="tel" placeholder="Telephone" name="phone">
+                                <input type="tel" placeholder="Telephone" name="phone"
+                                        {% if sessionStorage is defined and sessionStorage['phone'] is defined %}
+                                            value="{{ sessionStorage['phone'] }}"
+                                        {% endif %}
+                                >
                             </div>
                             <div class="agree-text col-md-6">
                                 <p>

@@ -408,11 +408,15 @@ class DefaultController extends Controller
     {
         $posts = $request->request->all();
         $posts = $this->cleanAll($posts);
-
+        $session = $request->getSession();
         if(false === $this->check($posts)){
+            $posts['plainPassword'] = null;
+            $posts['confirm'] = null;
+
+            $session->set('inscription', $posts);
             return $this->redirectToRoute('register');
         }
-
+        $session->remove('inscription');
         $user = new User();
         $user->setEmail($posts['email']);
         $user->setPlainPassword($posts['plainPassword']);
@@ -420,10 +424,11 @@ class DefaultController extends Controller
         $user->setLastname($posts['nom']);
         $user->setFirstname($posts['prenoms']);
         $user->setEnabled(true);
-        $manager = $this->get('fos_user.user_manager');
-        $manager->updateUser($user);
         $user->setPhone($posts['phone']);
 
+
+        $manager = $this->get('fos_user.user_manager');
+        $manager->updateUser($user);
         $this->addFlash('success', 'Vous avez été enregistré avec success');
         return $this->redirectToRoute('myaccount', ['username' => $user->getUsername()]);
 
@@ -497,14 +502,14 @@ class DefaultController extends Controller
         }
 
         /* on verifie que le mot de passe est correct */
-        $uppercase = preg_match('@[A-Z]@', $posts['plainPassword']);
-        $lowercase = preg_match('@[a-z]@', $posts['plainPassword']);
-        $number    = preg_match('@[0-9]@', $posts['plainPassword']);
-
-        if(!$uppercase || !$lowercase || !$number || strlen($posts['plainPassword']) < 8) {
-            $this->addFlash('danger', 'Le mot de passe doit contenir: au moins une lettre majuscule, une lettre minuscule, un chiffre et doit faire au moins 8 caracteres');
-            return false;
-        }
+//        $uppercase = preg_match('@[A-Z]@', $posts['plainPassword']);
+//        $lowercase = preg_match('@[a-z]@', $posts['plainPassword']);
+//        $number    = preg_match('@[0-9]@', $posts['plainPassword']);
+//
+//        if(!$uppercase || !$lowercase || !$number || strlen($posts['plainPassword']) < 8) {
+//            $this->addFlash('danger', 'Le mot de passe doit contenir: au moins une lettre majuscule, une lettre minuscule, un chiffre et doit faire au moins 8 caracteres');
+//            return false;
+//        }
 
         return true;
     }
