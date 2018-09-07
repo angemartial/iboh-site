@@ -48,6 +48,7 @@ security:
         - { path: ^/login_check, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/sauvegarder-utilisateur, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/inscription, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/ajouter-propriete, roles: ROLE_USER }
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/profile, roles: ROLE_USER }
         #- { path: ^/, role: ROLE_USER }
