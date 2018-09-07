@@ -68,13 +68,13 @@
                                             <p>
                                                 <span class="price">
                                                 {% if property.sale is not empty %}
-                                                    {{ property.sale.price }} CFA
+                                                    {{ property.sale.price| number_format(0, ',', ' ') }} CFA
                                                     <br>
-                                                    {% if property.sale.debate %}
+                                                    {% if property.sale.debate| number_format(0, ',', ' ') %}
                                                         A débattre
                                                     {% endif %}
                                                 {% else %}
-                                                    Loyer: {{ property.rental.monthly }} / Mois
+                                                    Loyer: {{ property.rental.monthly| number_format(0, ',', ' ') }} / Mois
                                                 {% endif %}
                                                 </span>
                                             </p>
@@ -126,34 +126,7 @@
                         {#</div>#}
                     {#</div>#}
 
-                    <div class="leave-review">
-                        <div class="review-title">
-                            <h5>Laisser un commentaire</h5>
-                        </div>
-                        <div class="review-inner">
-                            <form action="#">
-                                <div class="form-top">
-                                    <div class="input-filed">
-                                        <input type="text" placeholder="Votre Nom">
-                                    </div>
-                                    <div class="input-filed">
-                                        <input type="text" placeholder="Email">
-                                    </div>
-                                </div>
-                                <div class="form-bottom">
-                                    <div class="input-field">
-                                        <input type="text" placeholder="Sujet">
-                                    </div>
-                                    <textarea placeholder="Ecrire ici"></textarea>
-                                </div>
-                                <div class="submit-form">
-                                    <button type="submit">Envoyer</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
             <div class="col-md-4 col-sm-6 col-xs-12">
                 <div class="sidebar right-side">
                     <aside class="single-side-box search-property">

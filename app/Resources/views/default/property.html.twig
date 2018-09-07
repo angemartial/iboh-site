@@ -46,9 +46,9 @@
                                     <p><img src="{{ asset('img/property/icon-5.png') }}" alt=""> {{ property.subLocation }}, {{ property.location.title }}</p>
                                 </div>
                                 <h4 class="price">{% if property.sale is not null %}
-                                        {{ property.sale.price }} CFA
+                                        {{ property.sale.price| number_format(0, ',', ' ') }} CFA
                                     {% else %}
-                                        {{ property.rental.monthly }} CFA / Mois
+                                        {{ property.rental.monthly| number_format(0, ',', ' ') }} CFA / Mois
                                     {% endif %}
                                 </h4>
                             </div>
