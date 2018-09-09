@@ -176,9 +176,9 @@
                                                         , {{ property.location.title }}</p>
                                                 </div>
                                                 <h4 class="price">{% if property.sale is not null %}
-                                                        {{ property.sale.price }} CFA
+                                                        {{ property.sale.price| number_format(0, ',', ' ')  }} CFA
                                                     {% else %}
-                                                        {{ property.rental.monthly }} CFA
+                                                        {{ property.rental.monthly| number_format(0, ',', ' ')  }} CFA
                                                     {% endif %}
                                                 </h4>
                                             </div>
@@ -220,7 +220,9 @@
                                         </span>
                                         <div class="property-img">
                                             <a href="{{ path('property_details', {id: property.id})  }}">
-                                                <img src="{% if property.images is not empty %} {{ asset('uploads/' ~ property.images[0])  }} {% else %} {{ asset('img/property/7.jpg') }} {% endif %}"
+                                                <img src="{% if property.images is not empty %} {{ asset('uploads/' ~ property.images[0])  }}
+                                                                {% else %} {{ asset('img/property/7.jpg') }}
+                                                          {% endif %}"
                                                      alt="">
                                             </a>
                                         </div>
@@ -234,9 +236,9 @@
                                                         , {{ property.location.title }}</p>
                                                 </div>
                                                 <h4 class="price">{% if property.sale is not null %}
-                                                        {{ property.sale.price }} CFA
+                                                        {{ property.sale.price| number_format(0, ',', ' ')  }} CFA
                                                     {% else %}
-                                                        {{ property.rental.monthly }} CFA / Mois
+                                                        {{ property.rental.monthly| number_format(0, ',', ' ')  }} CFA / Mois
                                                     {% endif %}
                                                 </h4>
                                             </div>
@@ -264,255 +266,6 @@
                             {% endfor %}
                         </div>
                     </div>
-
-                    {#<div role="tabpanel" class="tab-pane fade" id="rent">#}
-                        {#<div class="property-list">#}
-                            {#<div class="col-md-4">#}
-                                {#<div class="single-property">#}
-                                    {#<div class="property-img">#}
-                                        {#<a href="single-properties.html">#}
-                                            {#<img src="img/property/4.jpg" alt="">#}
-                                        {#</a>#}
-                                    {#</div>#}
-                                    {#<div class="property-desc">#}
-                                        {#<div class="property-desc-top">#}
-                                            {#<h6><a href="single-properties.html">Friuli-Venezia Giulia</a></h6>#}
-                                            {#<h4 class="price">$12,354</h4>#}
-                                            {#<div class="property-location">#}
-                                                {#<p><img src="img/property/icon-5.png" alt=""> 568 E 1st Ave, Miami</p>#}
-                                            {#</div>#}
-                                        {#</div>#}
-                                        {#<div class="property-desc-bottom">#}
-                                            {#<div class="property-bottom-list">#}
-                                                {#<ul>#}
-                                                    {#<li>#}
-                                                        {#<img src="img/property/icon-1.png" alt="">#}
-                                                        {#<span>550 sqft</span>#}
-                                                    {#</li>#}
-                                                    {#<li>#}
-                                                        {#<img src="img/property/icon-2.png" alt="">#}
-                                                        {#<span>6</span>#}
-                                                    {#</li>#}
-                                                    {#<li>#}
-                                                        {#<img src="img/property/icon-3.png" alt="">#}
-                                                        {#<span>4</span>#}
-                                                    {#</li>#}
-                                                    {#<li>#}
-                                                        {#<img src="img/property/icon-4.png" alt="">#}
-                                                        {#<span>3</span>#}
-                                                    {#</li>#}
-                                                {#</ul>#}
-                                            {#</div>#}
-                                        {#</div>#}
-                                    {#</div>#}
-                                {#</div>#}
-                            {#</div>#}
-                            {#<div class="col-md-4">#}
-                                {#<div class="single-property">#}
-                                    {#<div class="property-img">#}
-                                        {#<a href="single-properties.html">#}
-                                            {#<img src="img/property/5.jpg" alt="">#}
-                                        {#</a>#}
-                                    {#</div>#}
-                                    {#<div class="property-desc">#}
-                                        {#<div class="property-desc-top">#}
-                                            {#<h6><a href="single-properties.html">Friuli-Venezia Giulia</a></h6>#}
-                                            {#<h4 class="price">$92,354</h4>#}
-                                            {#<div class="property-location">#}
-                                                {#<p><img src="img/property/icon-5.png" alt=""> 568 E 1st Ave, Miami</p>#}
-                                            {#</div>#}
-                                        {#</div>#}
-                                        {#<div class="property-desc-bottom">#}
-                                            {#<div class="property-bottom-list">#}
-                                                {#<ul>#}
-                                                    {#<li>#}
-                                                        {#<img src="img/property/icon-1.png" alt="">#}
-                                                        {#<span>550 sqft</span>#}
-                                                    {#</li>#}
-                                                    {#<li>#}
-                                                        {#<img src="img/property/icon-2.png" alt="">#}
-                                                        {#<span>6</span>#}
-                                                    {#</li>#}
-                                                    {#<li>#}
-                                                        {#<img src="img/property/icon-3.png" alt="">#}
-                                                        {#<span>4</span>#}
-                                                    {#</li>#}
-                                                    {#<li>#}
-                                                        {#<img src="img/property/icon-4.png" alt="">#}
-                                                        {#<span>3</span>#}
-                                                    {#</li>#}
-                                                {#</ul>#}
-                                            {#</div>#}
-                                        {#</div>#}
-                                    {#</div>#}
-                                {#</div>#}
-                            {#</div>#}
-                            {#<div class="col-md-4">#}
-                                {#<div class="single-property">#}
-                                    {#<div class="property-img">#}
-                                        {#<a href="single-properties.html">#}
-                                            {#<img src="img/property/6.jpg" alt="">#}
-                                        {#</a>#}
-                                    {#</div>#}
-                                    {#<div class="property-desc">#}
-                                        {#<div class="property-desc-top">#}
-                                            {#<h6><a href="single-properties.html">Radison de Villa</a></h6>#}
-                                            {#<h4 class="price">$22,354</h4>#}
-                                            {#<div class="property-location">#}
-                                                {#<p><img src="img/property/icon-5.png" alt=""> 12 1st Ave, New Yourk</p>#}
-                                            {#</div>#}
-                                        {#</div>#}
-                                        {#<div class="property-desc-bottom">#}
-                                            {#<div class="property-bottom-list">#}
-                                                {#<ul>#}
-                                                    {#<li>#}
-                                                        {#<img src="img/property/icon-1.png" alt="">#}
-                                                        {#<span>550 sqft</span>#}
-                                                    {#</li>#}
-                                                    {#<li>#}
-                                                        {#<img src="img/property/icon-2.png" alt="">#}
-                                                        {#<span>6</span>#}
-                                                    {#</li>#}
-                                                    {#<li>#}
-                                                        {#<img src="img/property/icon-3.png" alt="">#}
-                                                        {#<span>4</span>#}
-                                                    {#</li>#}
-                                                    {#<li>#}
-                                                        {#<img src="img/property/icon-4.png" alt="">#}
-                                                        {#<span>3</span>#}
-                                                    {#</li>#}
-                                                {#</ul>#}
-                                            {#</div>#}
-                                        {#</div>#}
-                                    {#</div>#}
-                                {#</div>#}
-                            {#</div>#}
-                            {#<div class="col-md-4">#}
-                                {#<div class="single-property">#}
-                                    {#<div class="property-img">#}
-                                        {#<a href="single-properties.html">#}
-                                            {#<img src="img/property/3.jpg" alt="">#}
-                                        {#</a>#}
-                                    {#</div>#}
-                                    {#<div class="property-desc">#}
-                                        {#<div class="property-desc-top">#}
-                                            {#<h6><a href="single-properties.html">Friuli-Venezia Giulia</a></h6>#}
-                                            {#<h4 class="price">$52,334</h4>#}
-                                            {#<div class="property-location">#}
-                                                {#<p><img src="img/property/icon-5.png" alt=""> 568 E 1st Ave, Miami</p>#}
-                                            {#</div>#}
-                                        {#</div>#}
-                                        {#<div class="property-desc-bottom">#}
-                                            {#<div class="property-bottom-list">#}
-                                                {#<ul>#}
-                                                    {#<li>#}
-                                                        {#<img src="img/property/icon-1.png" alt="">#}
-                                                        {#<span>550 sqft</span>#}
-                                                    {#</li>#}
-                                                    {#<li>#}
-                                                        {#<img src="img/property/icon-2.png" alt="">#}
-                                                        {#<span>6</span>#}
-                                                    {#</li>#}
-                                                    {#<li>#}
-                                                        {#<img src="img/property/icon-3.png" alt="">#}
-                                                        {#<span>4</span>#}
-                                                    {#</li>#}
-                                                    {#<li>#}
-                                                        {#<img src="img/property/icon-4.png" alt="">#}
-                                                        {#<span>3</span>#}
-                                                    {#</li>#}
-                                                {#</ul>#}
-                                            {#</div>#}
-                                        {#</div>#}
-                                    {#</div>#}
-                                {#</div>#}
-                            {#</div>#}
-                            {#<div class="col-md-4">#}
-                                {#<div class="single-property">#}
-                                    {#<div class="property-img">#}
-                                        {#<a href="single-properties.html">#}
-                                            {#<img src="img/property/8.jpg" alt="">#}
-                                        {#</a>#}
-                                    {#</div>#}
-                                    {#<div class="property-desc">#}
-                                        {#<div class="property-desc-top">#}
-                                            {#<h6><a href="single-properties.html">Radison de Villa</a></h6>#}
-                                            {#<h4 class="price">$52,351</h4>#}
-                                            {#<div class="property-location">#}
-                                                {#<p><img src="img/property/icon-5.png" alt=""> 668 L 2nd Ave, Boston</p>#}
-                                            {#</div>#}
-                                        {#</div>#}
-                                        {#<div class="property-desc-bottom">#}
-                                            {#<div class="property-bottom-list">#}
-                                                {#<ul>#}
-                                                    {#<li>#}
-                                                        {#<img src="img/property/icon-1.png" alt="">#}
-                                                        {#<span>550 sqft</span>#}
-                                                    {#</li>#}
-                                                    {#<li>#}
-                                                        {#<img src="img/property/icon-2.png" alt="">#}
-                                                        {#<span>6</span>#}
-                                                    {#</li>#}
-                                                    {#<li>#}
-                                                        {#<img src="img/property/icon-3.png" alt="">#}
-                                                        {#<span>4</span>#}
-                                                    {#</li>#}
-                                                    {#<li>#}
-                                                        {#<img src="img/property/icon-4.png" alt="">#}
-                                                        {#<span>3</span>#}
-                                                    {#</li>#}
-                                                {#</ul>#}
-                                            {#</div>#}
-                                        {#</div>#}
-                                    {#</div>#}
-                                {#</div>#}
-                            {#</div>#}
-                            {#<div class="col-md-4">#}
-                                {#<div class="single-property">#}
-                                    {#<div class="property-img">#}
-                                        {#<a href="single-properties.html"><img src="img/property/9.jpg" alt=""></a>#}
-                                    {#</div>#}
-                                    {#<div class="property-desc">#}
-                                        {#<div class="property-desc-top">#}
-                                            {#<h6><a href="single-properties.html">Handson de Villa</a></h6>#}
-                                            {#<h4 class="price">$62,354</h4>#}
-                                            {#<div class="property-location">#}
-                                                {#<p><img src="img/property/icon-5.png" alt=""> 568 E 1st Ave, Miami</p>#}
-                                            {#</div>#}
-                                        {#</div>#}
-                                        {#<div class="property-desc-bottom">#}
-                                            {#<div class="property-bottom-list">#}
-                                                {#<ul>#}
-                                                    {#<li>#}
-                                                        {#<img src="img/property/icon-1.png" alt="">#}
-                                                        {#<span>550 sqft</span>#}
-                                                    {#</li>#}
-                                                    {#<li>#}
-                                                        {#<img src="img/property/icon-2.png" alt="">#}
-                                                        {#<span>6</span>#}
-                                                    {#</li>#}
-                                                    {#<li>#}
-                                                        {#<img src="img/property/icon-3.png" alt="">#}
-                                                        {#<span>4</span>#}
-                                                    {#</li>#}
-                                                    {#<li>#}
-                                                        {#<img src="img/property/icon-4.png" alt="">#}
-                                                        {#<span>3</span>#}
-                                                    {#</li>#}
-                                                {#</ul>#}
-                                            {#</div>#}
-                                        {#</div>#}
-                                    {#</div>#}
-                                {#</div>#}
-                            {#</div>#}
-                        {#</div>#}
-                    {#</div>#}
-                {#</div>#}
-            </div>
-        </div>
-        </div>
-    </div>
-    <!--Feature property section end-->
 
 
 {% endblock %}

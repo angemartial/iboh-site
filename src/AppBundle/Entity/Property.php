@@ -140,7 +140,7 @@ class Property
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
@@ -149,7 +149,7 @@ class Property
      * @param int $id
      * @return Property
      */
-    public function setId(int $id): Property
+    public function setId(int $id)
     {
         $this->id = $id;
         return $this;
@@ -158,7 +158,7 @@ class Property
     /**
      * @return string
      */
-    public function getTitle(): string
+    public function getTitle()
     {
         return $this->title;
     }
@@ -167,7 +167,7 @@ class Property
      * @param string $title
      * @return Property
      */
-    public function setTitle(string $title): Property
+    public function setTitle(string $title)
     {
         $this->title = $title;
         return $this;
@@ -176,7 +176,7 @@ class Property
     /**
      * @return string
      */
-    public function getDescription(): string
+    public function getDescription()
     {
         return $this->description;
     }
@@ -185,7 +185,7 @@ class Property
      * @param string $description
      * @return Property
      */
-    public function setDescription(string $description): Property
+    public function setDescription(string $description)
     {
         $this->description = $description;
         return $this;
@@ -194,7 +194,7 @@ class Property
     /**
      * @return int
      */
-    public function getYear(): int
+    public function getYear()
     {
         return $this->year;
     }
@@ -203,7 +203,7 @@ class Property
      * @param int $year
      * @return Property
      */
-    public function setYear(int $year): Property
+    public function setYear(int $year)
     {
         $this->year = $year;
         return $this;
@@ -212,7 +212,7 @@ class Property
     /**
      * @return int
      */
-    public function getLivingSpace(): int
+    public function getLivingSpace()
     {
         return $this->livingSpace;
     }
@@ -221,7 +221,7 @@ class Property
      * @param int $livingSpace
      * @return Property
      */
-    public function setLivingSpace(int $livingSpace): Property
+    public function setLivingSpace(int $livingSpace)
     {
         $this->livingSpace = $livingSpace;
         return $this;
@@ -230,7 +230,7 @@ class Property
     /**
      * @return int
      */
-    public function getFieldSpace(): int
+    public function getFieldSpace()
     {
         return $this->fieldSpace;
     }
@@ -239,7 +239,7 @@ class Property
      * @param int $fieldSpace
      * @return Property
      */
-    public function setFieldSpace(int $fieldSpace): Property
+    public function setFieldSpace(int $fieldSpace)
     {
         $this->fieldSpace = $fieldSpace;
         return $this;
@@ -248,7 +248,7 @@ class Property
     /**
      * @return int
      */
-    public function getBedroom(): int
+    public function getBedroom()
     {
         return $this->bedroom;
     }
@@ -257,7 +257,7 @@ class Property
      * @param int $bedroom
      * @return Property
      */
-    public function setBedroom(int $bedroom): Property
+    public function setBedroom(int $bedroom)
     {
         $this->bedroom = $bedroom;
         return $this;
@@ -266,7 +266,7 @@ class Property
     /**
      * @return int
      */
-    public function getBathroom(): int
+    public function getBathroom()
     {
         return $this->bathroom;
     }
@@ -275,7 +275,7 @@ class Property
      * @param int $bathroom
      * @return Property
      */
-    public function setBathroom(int $bathroom): Property
+    public function setBathroom(int $bathroom)
     {
         $this->bathroom = $bathroom;
         return $this;
@@ -284,7 +284,7 @@ class Property
     /**
      * @return int
      */
-    public function getKitchen(): int
+    public function getKitchen()
     {
         return $this->kitchen;
     }
@@ -293,7 +293,7 @@ class Property
      * @param int $kitchen
      * @return Property
      */
-    public function setKitchen(int $kitchen): Property
+    public function setKitchen(int $kitchen)
     {
         $this->kitchen = $kitchen;
         return $this;
@@ -302,7 +302,7 @@ class Property
     /**
      * @return Location
      */
-    public function getLocation(): Location
+    public function getLocation()
     {
         return $this->location;
     }
@@ -311,7 +311,7 @@ class Property
      * @param Location $location
      * @return Property
      */
-    public function setLocation(Location $location): Property
+    public function setLocation(Location $location)
     {
         $this->location = $location;
         return $this;
@@ -329,7 +329,7 @@ class Property
      * @param Sale $sale
      * @return Property
      */
-    public function setSale(Sale $sale): Property
+    public function setSale(Sale $sale)
     {
         $this->sale = $sale;
         return $this;
@@ -347,7 +347,7 @@ class Property
      * @param Type $type
      * @return Property
      */
-    public function setType(Type $type): Property
+    public function setType(Type $type)
     {
         $this->type = $type;
         return $this;
@@ -365,7 +365,7 @@ class Property
      * @param Rental $rental
      * @return Property
      */
-    public function setRental(Rental $rental): Property
+    public function setRental(Rental $rental)
     {
         $this->rental = $rental;
         return $this;
@@ -383,7 +383,7 @@ class Property
      * @param Convenience $convenience
      * @return Property
      */
-    public function addConvenience(Convenience $convenience): Property
+    public function addConvenience(Convenience $convenience)
     {
         $this->conveniences[] = $convenience;
 
@@ -394,7 +394,7 @@ class Property
      * @param Convenience $convenience
      * @return Property
      */
-    public function removeConvenience(Convenience $convenience): Property
+    public function removeConvenience(Convenience $convenience)
     {
         $this->conveniences->removeElement($convenience);
 
@@ -413,7 +413,7 @@ class Property
      * @param string $subLocation
      * @return Property
      */
-    public function setSubLocation(string $subLocation): Property
+    public function setSubLocation(string $subLocation)
     {
         $this->subLocation = $subLocation;
         return $this;
@@ -431,7 +431,7 @@ class Property
      * @param array $images
      * @return $this|Property
      */
-    public function setImages(array $images): Property
+    public function setImages(array $images)
     {
         $this->images = $images;
         return $this;
@@ -449,7 +449,7 @@ class Property
      * @param bool $published
      * @return Property
      */
-    public function setPublished(bool $published): Property
+    public function setPublished(bool $published)
     {
         $this->published = $published;
         return $this;
