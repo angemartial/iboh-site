@@ -308,6 +308,8 @@ class DefaultController extends Controller
 //                $this->addFlash('danger', ' cochez le recaptcha :) ');
 //            }
             if( $this->checkRequired($posts) && $verify){
+
+
                 $mailer = $this->get('mailer');
                 $message = 'Vous venez de recevoir un message de :'.PHP_EOL;
 
@@ -320,9 +322,11 @@ class DefaultController extends Controller
                 $message.= $posts['message'];
 
                 $message = (new \Swift_Message('Message de contact utilisateur immobilier.ibohcompany.com'))
-                    ->setFrom(['test@ibohcompany.com' => 'Immobilier-Iboh'])
-                    ->setTo(['eric997997@gmail.com' => 'Eric Léonard', 'angemartialkoffi@gmail.com' => 'Ange Martial Koffi'])
-                    ->setBody($message);
+                    ->setFrom(['angem@ibohcompany.com' => 'Immobilier-Iboh'])
+                    ->setTo(['angemartialkoffi@gmail.com' => 'Ange Martial Koffi',
+                        'eric997997@gmail.com' => 'Eric Léonard'])
+                    ->setBody($message)
+                    ->setReplyTo([ $posts['email'] =>  $posts['name'] ]);
 
                 $mailer->send($message);
 

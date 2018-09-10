@@ -149,7 +149,7 @@ class PropertySearch
     /**
      * @return int
      */
-    public function getPriceMax(): int
+    public function getPriceMax()
     {
         return $this->priceMax;
     }
