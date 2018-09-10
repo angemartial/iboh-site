@@ -14,7 +14,7 @@
                         <form action="{{ url('save_user') }}" method="post">
                             <div class="col-md-6 username">
 
-                                <input type="text" placeholder="Nom Utilisateur" name="username"
+                                <input required type="text" placeholder="Nom Utilisateur" name="username"
 
                                     {% if sessionStorage is defined and sessionStorage['username'] is defined %}
                                         value="{{ sessionStorage['username'] }}"
@@ -22,17 +22,17 @@
                                 >
                             </div>
                             <div class="col-md-6 email">
-                                <input type="email" placeholder="Email" name="email"
+                                <input required type="email" placeholder="Email" name="email"
                                         {% if sessionStorage is defined and sessionStorage['email'] is defined %}
                                             value="{{ sessionStorage['email'] }}"
                                         {% endif %}
                                 >
                             </div>
                             <div class="col-md-6 password">
-                                <input type="password" placeholder="Mot de passe" name="plainPassword">
+                                <input required type="password" placeholder="Mot de passe" name="plainPassword">
                             </div>
                             <div class="col-md-6 password">
-                                <input type="password" placeholder="Confirmer mot de passe" name="confirm">
+                                <input required type="password" placeholder="Confirmer mot de passe" name="confirm">
                             </div>
                             <div class="col-md-6">
                                 <i class="icofont icofont-business-man"></i>

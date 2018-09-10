@@ -13,7 +13,6 @@ use AppBundle\Entity\Type;
 use Dup\UserBundle\Entity\User;
 use AppBundle\Extra\PropertySearch;
 use AppBundle\Form\PropertySearchType;
-use Dup\UserBundle\DupUserBundle;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -31,7 +30,7 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $properties = $em->getRepository(Property::class)
-            ->findBy([], ['id' => 'DESC'], 5, 0);
+            ->findBy(['published' => true], ['id' => 'DESC'], 10, 0);
 
         $projects = $em->getRepository(Project::class)
             ->findAll();
@@ -409,6 +408,7 @@ class DefaultController extends Controller
         $posts = $request->request->all();
         $posts = $this->cleanAll($posts);
         $session = $request->getSession();
+
         if(false === $this->check($posts)){
             $posts['plainPassword'] = null;
             $posts['confirm'] = null;
@@ -437,6 +437,7 @@ class DefaultController extends Controller
     private function check(array $posts){
         /* On verifie que les données obligatoires sont presentes */
         $required = ['username', 'email', 'plainPassword', 'confirm', 'phone'];
+
         foreach ($required as $post) {
             if( false === array_key_exists($post, $posts) && empty( $posts[$post] ) ){
                 $this->addFlash('danger', 'La case '.$post.' ne peut pas être vide');
@@ -450,10 +451,10 @@ class DefaultController extends Controller
           - il contient pas de charactere vide
           - il fait entre 6 et 32 caracteres
          */
-        if ( !preg_match('/^[A-Za-z][A-Za-z0-9]{4,31}$/', $posts['username']) ){
-            $this->addFlash('danger', "le nom d'utilisateur ne peut pas contenir d'espace vide ou commencer par un chiffre");
-            return false;
-        }
+//        if ( !preg_match('/^[A-Za-z][A-Za-z0-9]{1,31}$/', $posts['username']) ){
+//            $this->addFlash('danger', "le nom d'utilisateur ne peut pas contenir d'espace vide ou commencer par un chiffre");
+//            return false;
+//        }
 
         $em = $this->getDoctrine()->getManager();
         $userRepository = $user = $em->getRepository(User::class);
@@ -498,6 +499,11 @@ class DefaultController extends Controller
         /* on verifie que le mot de passe et la confirmation ne sont pas different */
         if($posts['plainPassword'] !== $posts['confirm']){
             $this->addFlash('danger', 'les mots de passes saisis ne correspondent pas');
+            return false;
+        }
+
+        if(strlen($posts['plainPassword']) < 4){
+            $this->addFlash('danger', 'Le mot de passe doit contenir au moins 4 caracteres');
             return false;
         }
 
