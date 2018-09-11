@@ -2484,7 +2484,7 @@ article blockquote {
   position: relative;
   color: #606060;
   font-weight: 300;
-  
+
 }
 .feature-check input[type="checkbox"] + label::before {
   content: "";
