@@ -21,7 +21,7 @@
                                         <div class="col-md-9 col-sm-7 col-xs-12">
                                             <div class="input-file">
                                                 <label>Titre de la propriété</label>
-                                                <input name="title" type="text" placeholder="Mettre le titre ici">
+                                                <input required name="title" type="text" placeholder="Mettre le titre ici">
                                             </div>
                                         </div>
                                         <div class="col-md-3 col-sm-5 col-xs-12">
@@ -97,9 +97,9 @@
                                     <div class="col-md-6 col-sm-6 col-xs-12 ">
                                         <div class="input-file">
                                             <label>Localité</label>
-                                            <select name="location" class="selectpicker" title="Localité" data-hide-disabled="true" data-live-search="true">
+                                            <select required name="location" class="selectpicker" title="Localité" data-hide-disabled="true" data-live-search="true">
                                                 {% for location in locations %}
-                                                    <option value="{{ location.id }}">{{ location.title }}</option>
+                                                    <option  value="{{ location.id }}">{{ location.title }}</option>
                                                 {% endfor %}
                                             </select>
                                         </div>
@@ -113,7 +113,7 @@
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <div class="input-file">
                                             <label>Type</label>
-                                            <select name="type" class="selectpicker" title="Type" data-hide-disabled="true">
+                                            <select required name="type" class="selectpicker" title="Type" data-hide-disabled="true">
 
                                                 {% for type in types %}
                                                     <option value="{{ type.id }}">{{ type.title }}</option>

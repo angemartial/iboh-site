@@ -88,35 +88,55 @@ class DefaultController extends Controller
         $property->setKitchen((int) $posts['kitchen']);
         $property->setLivingSpace((int) $posts['living_space']);
         $property->setSubLocation($posts['sub_location']);
-        $property->setImages($posts['uploads']);
 
-        /** @var Location $location */
-        $location = $em->getRepository(Location::class)->find((int) $posts['location']);
-        $property->setLocation($location);
+       if(isset($posts['uploads'])){
+           $property->setImages($posts['uploads']);
+       }
 
-        $type = $em->getRepository(Type::class)->find($posts['type']);
-        $property->setType($type);
+
+
+        if(isset($posts['location'])){
+           /** @var Location $location */
+            $location = $em->getRepository(Location::class)->find((int) $posts['location']);
+            if(null !== $location){
+                $property->setLocation($location);
+            }
+
+        }
+
+        if(isset($posts['type'])){
+            $type = $em->getRepository(Type::class)->find($posts['type']);
+            if(null !== $type){
+                $property->setType($type);
+            }
+
+        }
+
 
         //
         $convenienceRepository = $em->getRepository(Convenience::class);
 
-        foreach ($posts['conveniences'] as $convenienceId) {
-            $convenience = $convenienceRepository->find((int) $convenienceId);
-            $property->addConvenience($convenience);
+        if(isset($posts['conveniences']) && is_array($posts['conveniences'])){
+            foreach ($posts['conveniences'] as $convenienceId) {
+                $convenience = $convenienceRepository->find((int) $convenienceId);
+                $property->addConvenience($convenience);
+            }
         }
+
+
 
         $price = $posts['sale_price'];
 
         if(empty($price)){
             $rental = new Rental();
-            $rental->setAdvance($posts['rent_advance']);
-            $rental->setDeposit($posts['rent_deposit']);
-            $rental->setMonthly($posts['rent_monthly']);
+            $rental->setAdvance((int) $posts['rent_advance']);
+            $rental->setDeposit((int) $posts['rent_deposit']);
+            $rental->setMonthly((int) $posts['rent_monthly']);
             $property->setRental($rental);
             $em->persist($rental);
         }else{
             $sale = new Sale();
-            $sale->setPrice($posts['sale_price']);
+            $sale->setPrice((int) $posts['sale_price']);
             $sale->setDebate(true);
             $property->setSale($sale);
             $em->persist($sale);
