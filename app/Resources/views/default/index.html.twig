@@ -68,14 +68,13 @@
             <div class="row">
                 <div class="col-md-12 ">
                     <div class="section-title text-center">
-                        <h3>Nos Services</h3>
+                        <h3>Nos services</h3>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-3 col-sm-12">
-                    <div class="single-services wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="0.2s"
-                         style="visibility: visible; animation-duration: 1.3s; animation-delay: 0.2s; animation-name: fadeInUp;">
+                    <div class="single-services">
                         <div class="single-services-img">
                             <img src="{{ asset('img/service/house-1.svg') }}" alt="">
                         </div>
@@ -86,8 +85,7 @@
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-12">
-                    <div class="single-services wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="0.2s"
-                         style="visibility: visible; animation-duration: 1.3s; animation-delay: 0.2s; animation-name: fadeInUp;">
+                    <div class="single-services ">
                         <div class="single-services-img">
                             <img src="{{ asset('img/service/house.svg') }}" alt="">
                         </div>
@@ -98,8 +96,7 @@
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-3">
-                    <div class="single-services wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="0.2s"
-                         style="visibility: visible; animation-duration: 1.3s; animation-delay: 0.2s; animation-name: fadeInUp;">
+                    <div class="single-service">
                         <div class="single-services-img">
                             <img src="{{ asset('img/service/house-key.svg') }}" alt="">
                         </div>
@@ -110,8 +107,7 @@
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-12">
-                    <div class="single-services wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="0.2s"
-                         style="visibility: visible; animation-duration: 1.3s; animation-delay: 0.2s; animation-name: fadeInUp;">
+                    <div class="single-services wow fadeInUp">
                         <div class="single-services-img">
                             <img src="{{ asset('img/service/plant.svg') }}" alt="">
                         </div>
@@ -128,7 +124,7 @@
     <!--Services section end-->
 
     <!--Feature property section start-->
-    <div class="property-area fadeInUp wow ptb-50" data-wow-delay="0.2s">
+    <div class="property-area fadeInUp ">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -155,8 +151,7 @@
                         <div class="property-list">
                             {% for property in properties if property.sale is not null %}
                                 <div class="col-md-4">
-                                    <div class="single-property mb-40 fadeInUp wow" data-wow-delay="0.2s"
-                                         style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                                    <div class="single-property mb-40 fadeInUp ">
                                         <span>
                                             {% if property.sale is not null %}
                                                 EN VENTE
@@ -215,8 +210,7 @@
                         <div class="property-list">
                             {% for property in properties if property.sale is null %}
                                 <div class="col-md-4">
-                                    <div class="single-property mb-40 fadeInUp wow" data-wow-delay="0.2s"
-                                         style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                                    <div class="single-property mb-40 fadeInUp wow">
                                         <span>
                                             {% if property.sale is not null %}
                                                 EN VENTE

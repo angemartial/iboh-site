@@ -58,7 +58,14 @@ class PropertySearchType extends AbstractType
             ]
         ])
         ->add('priceMin', null, [
-            'label' => 'Prix'
+            "attr" => [
+                'placeholder' => 'Prix min'
+            ]
+        ])
+        ->add('priceMax', null, [
+            "attr" => [
+                'placeholder' => 'Prix max'
+            ]
         ])
         ->add('submit', SubmitType::class, [
             'label' => 'Trouver'

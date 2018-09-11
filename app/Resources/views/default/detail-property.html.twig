@@ -130,20 +130,7 @@
                 animation: "slide",
                 controlNav: "thumbnails"
             });
-            var sliderPrice =  $( "#slider-price" );
-            sliderPrice.slider({
-                range: true,
-                min: 0,
-                step: 10000,
-                max: 500000000,
-                values: [ 0, 30000000 ],
-                slide: function( event, ui ) {
-                    $( "#appbundle_propertysearch_priceMin" ).val(  ui.values[ 0 ] + " - " + ui.values[ 1 ] );
-                }
-            });
-            $( "#appbundle_propertysearch_priceMin" ).val(  sliderPrice.slider( "values", 0 ) +
-                " - " + sliderPrice.slider( "values", 1 ) );
-            });
+        });
     </script>
 {% endblock %}
 {% block css %}

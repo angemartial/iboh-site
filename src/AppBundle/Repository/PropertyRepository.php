@@ -47,7 +47,9 @@ class PropertyRepository extends \Doctrine\ORM\EntityRepository
     }
 
     public function search(PropertySearch $search){
-        $qb = $this->createQueryBuilder('p');
+        $qb = $this->createQueryBuilder('p')
+            ->where('p.published = :published')
+            ->setParameter('published', true);
 
         if(null !== $search->getLocation()){
             $qb->andWhere('p.location = :location')
@@ -84,13 +86,33 @@ class PropertyRepository extends \Doctrine\ORM\EntityRepository
                 ->setParameter(':bedrooms', $bedRooms);
         }
 
-//        $price = (int) $search->getPriceMax();
-//        list($min, $max) = explode('-', $price);
-//        $min = (int) $min;
-//        $max = (int) $max;
-//        if($min && $max){
-//
-//        }
+        $minPrice = (int) $search->getPriceMin();
+        $maxPrice = (int) $search->getPriceMax();
+        if($minPrice || $maxPrice){
+            $qb->leftJoin('p.sale', 's')
+                ->leftJoin('p.rental', 'r')
+                ->addSelect('s')
+                ->addSelect('r');
+        }
+        if($minPrice){
+            $qb->andWhere(
+                $qb->expr()->orX(
+                    $qb->expr()->gte('s.price', ':minPrice'),
+                    $qb->expr()->gte('r.monthly', ':minPrice')
+                )
+            )
+            ->setParameter('minPrice', $minPrice);
+        }
+
+        if($maxPrice){
+            $qb->andWhere(
+                $qb->expr()->orX(
+                    $qb->expr()->lte('s.price', ':maxPrice'),
+                    $qb->expr()->lte('r.monthly', ':maxPrice')
+                )
+            )
+                ->setParameter('maxPrice', $maxPrice);
+        }
 
         return $qb->getQuery()->getResult();
 

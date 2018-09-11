@@ -48,6 +48,7 @@ class PropertySearch
      */
     private $priceMin;
 
+
     /**
      * @return Location
      */

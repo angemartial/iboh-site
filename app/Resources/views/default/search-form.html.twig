@@ -34,21 +34,31 @@
                 {{ form_widget(form.bathRooms) }}
             </div>
         </div>
+        <div class="col-md-6">
+            <div class="find-home-item no-caret  custom-select">
+                {{ form_widget(form.priceMin) }}
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="find-home-item no-caret  custom-select">
+                {{ form_widget(form.priceMax) }}
+            </div>
+        </div>
 
-        <div class="find-home_bottom">
-            <div class="col-md-12">
-                <div class="find-home-item">
-                    <!-- shop-filter -->
-                    <div class="shop-filter">
-                        <div class="price_filter">
-                            <div class="price_slider_amount">
-                                <span>Prix</span>
-                                {{ form_widget(form.priceMin) }}
-                            </div>
-                            <div id="slider-price"></div>
-                        </div>
-                    </div>
-                </div>
+        {#<div class="find-home_bottom">#}
+            {#<div class="col-md-12">#}
+                {#<div class="find-home-item">#}
+                    {#<!-- shop-filter -->#}
+                    {#<div class="shop-filter">#}
+                        {#<div class="price_filter">#}
+                            {#<div class="price_slider_amount">#}
+                                {#<span>Prix</span>#}
+                                {#{{ form_widget(form.priceMin) }}#}
+                            {#</div>#}
+                            {#<div id="slider-price"></div>#}
+                        {#</div>#}
+                    {#</div>#}
+                {#</div>#}
                 <div class="find-home-item">
                     {{ form_widget(form.submit) }}
                 </div>

@@ -1052,13 +1052,14 @@ img{max-width: 100%}
     display: inline-block;
 }
 .footer-menu li a {
-  color: #e2e0e0;
-  display: block;
-  font-family: "Poppins",sans-serif;
-  font-weight: 300;
-  margin-left: 25px;
-  padding: 28px 0;
-  text-transform: uppercase;
+    color: #e2e0e0;
+    display: block;
+    font-family: "Poppins",sans-serif;
+    font-weight: 300;
+    margin-left: 25px;
+    padding: 28px 0;
+    /* text-transform: uppercase; */
+    font-size: 1rem;
 }
 .footer-menu li:first-child a {
     margin-left: 0;
@@ -2391,12 +2392,12 @@ article blockquote {
 .information-title > h5 {
     color: #303030;
     font-weight: 400;
-    text-transform: capitalize;
+
 }
 .add-property-box .input-file > label, .information-text > label {
   color: #303030;
   margin-bottom: 14px;
-  text-transform: capitalize;
+
 }
 .add-property-box .input-file > input {
     background: #fbfbfe none repeat scroll 0 0;
@@ -2483,7 +2484,7 @@ article blockquote {
   position: relative;
   color: #606060;
   font-weight: 300;
-  text-transform: capitalize;
+  
 }
 .feature-check input[type="checkbox"] + label::before {
   content: "";
