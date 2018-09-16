@@ -1090,10 +1090,10 @@ img{max-width: 100%}
 .find-home-box.postion {
     position: absolute;
     right: 20%;
-    top: 50%;
+    top: 55%;
     -webkit-transform: translateY(-50%);
     transform: translateY(-50%);
-    margin-top: 3rem;
+    margin-top: 0;
 }
 .find-home-box {
   background: rgba(0, 67, 149, 0.7) none repeat scroll 0 0;
@@ -1391,7 +1391,7 @@ img{max-width: 100%}
     position: relative;
     text-transform: capitalize;
 }
-.aside-title h3 {
+.aside-title h3, h4  {
     color: white;
     line-height: 30px;
     margin: 0;
@@ -1400,6 +1400,7 @@ img{max-width: 100%}
     position: relative;
     text-transform: capitalize;
 }
+
 .display-table{
     text-align: left;
 }

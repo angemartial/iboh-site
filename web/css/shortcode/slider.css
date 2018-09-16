@@ -28,7 +28,8 @@ NOTE: This is Header style file. Slider css style included in this file.
   z-index: 9;
 }
 .slider-container {
-  position: relative;
+    position: relative;
+    margin-top: 105px;
 }
 .slide1-text {
     position: relative;
