@@ -10,6 +10,7 @@ namespace AppBundle\Form;
 
 
 use AppBundle\Entity\Location;
+use AppBundle\Entity\Type;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -32,11 +33,22 @@ class PropertySearchType extends AbstractType
                 'data-live-search' => 'true'
             ]
         ])
-        ->add('subLocation', null, [
-            "attr" => [
-                'placeholder' => 'Quartier'
+        ->add('type', EntityType::class, [
+            'label' => 'Type de maison',
+            'class' => Type::class,
+            'choice_label' => 'title',
+            'attr' => [
+                'class' => 'selectpicker',
+                'title' => 'Type de maison',
+                'data-hide-disabled' => 'true',
+                'data-live-search' => 'true'
             ]
         ])
+//        ->add('subLocation', null, [
+//            "attr" => [
+//                'placeholder' => 'Quartier'
+//            ]
+//        ])
         ->add('minArea', null, [
             "attr" => [
                 'placeholder' => 'Superficie min'
@@ -47,16 +59,16 @@ class PropertySearchType extends AbstractType
                 'placeholder' => 'Superficie max'
             ]
         ])
-        ->add('bedRooms', null, [
-            "attr" => [
-                'placeholder' => 'Chambres'
-            ]
-        ])
-        ->add('bathRooms', null, [
-            "attr" => [
-                'placeholder' => 'Salles de bain'
-            ]
-        ])
+//        ->add('bedRooms', null, [
+//            "attr" => [
+//                'placeholder' => 'Chambres'
+//            ]
+//        ])
+//        ->add('bathRooms', null, [
+//            "attr" => [
+//                'placeholder' => 'Salles de bain'
+//            ]
+//        ])
         ->add('priceMin', null, [
             "attr" => [
                 'placeholder' => 'Prix min'

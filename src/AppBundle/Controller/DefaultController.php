@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Convenience;
 use AppBundle\Entity\Location;
+use AppBundle\Entity\PasswordResetToken;
 use AppBundle\Entity\Project;
 use AppBundle\Entity\Property;
 use AppBundle\Entity\Rental;
@@ -19,6 +20,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PropertyAccess\PropertyAccess;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class DefaultController extends Controller
 {
@@ -342,9 +344,9 @@ class DefaultController extends Controller
                 $message.= $posts['message'];
 
                 $message = (new \Swift_Message('Message de contact utilisateur immobilier.ibohcompany.com'))
-                    ->setFrom(['angem@ibohcompany.com' => 'Immobilier-Iboh'])
+                    ->setFrom(['info@ibohcompany.com' => 'Immobilier-Iboh'])
                     ->setTo(['angemartialkoffi@gmail.com' => 'Ange Martial Koffi',
-                        'eric997997@gmail.com' => 'Eric Léonard'])
+                        'eric997997@gmail.com' => 'Eric Léonard','info@ibohcompany.com' =>'Iboh Info' ])
                     ->setBody($message)
                     ->setReplyTo([ $posts['email'] =>  $posts['name'] ]);
 
@@ -409,6 +411,104 @@ class DefaultController extends Controller
             $this->addFlash('success', 'L\'utilisateur a été mis à jour avec succès');
         }
         return $this->redirectToRoute('myaccount', ['username' => $user->getUsername()]);
+    }
+
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/reset-password", name="reset_password")
+     */
+    public function resetPasswordAction(Request $request){
+
+        $posts = $request->request->all() ?? [];
+        $posts = $this->cleanAll($posts);
+
+        if(array_key_exists('email', $posts)){
+            $email = $posts['email'];
+            $manager = $this->get('fos_user.user_manager');
+            $user = $manager->findUserBy(['email' => $email]);
+            if(null === $user){
+                $this->addFlash('danger', 'Cette adresse mail ne correspond à aucun utilisateur dans notre systeme');
+                return $this->redirectToRoute('reset_password');
+            }
+
+            $this->sendPasswordResetMail($user);
+            $this->addFlash('success', 'Vous avez reçu un mail de notre part. Merci de cliquer sur le lien contenu dans le mail pour reinitialiser le mot de passe.');
+            return $this->redirectToRoute('reset_password');
+        }
+
+        return $this->render('reset_password.html.twig');
+    }
+
+    /**
+     * @Route("/new-password/{token}", name="new_password")
+     * @param Request $request
+     * @param $token
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function newPasswordAction(Request $request, $token){
+
+        $token = $this->clean($token);
+        $em = $this->getDoctrine()->getManager();
+        $posts = $request->request->all();
+        $tokenObject = $em->getRepository(PasswordResetToken::class)
+            ->findOneBy(['token' => $token]);
+
+        $now = new \DateTime();
+        if(null === $tokenObject || (($now->getTimestamp() - $tokenObject->getDate()->getTimestamp() ) / 60)  >= 60    ){
+            $this->addFlash('danger','Ce lien de reinitialisation est incorrect ou a expiré');
+            return $this->redirectToRoute('dup_user_security_login');
+        }
+
+
+        if(!empty($posts) && array_key_exists('plainPassword', $posts)){
+            $posts = $this->cleanAll($posts);
+
+            $manager = $this->get('fos_user.user_manager');
+            /** @var PasswordResetToken $tokenObject */
+
+
+            if($this->checkPassword($posts)){
+                $user = $tokenObject->getUser();
+                $user->setPlainPassword($posts['plainPassword']);
+                $manager->updateUser($user);
+                $this->addFlash('success','Mot de passe reinitialisé avec succes ! vous pouvez essayer de vous connecter');
+                $em->remove($tokenObject);
+                $em->flush();
+                return $this->redirectToRoute('myaccount', ['username' => $user->getUsername()]);
+            }
+        }
+
+
+        return $this->render('new-password.html.twig',[
+            'token' => $token
+        ]);
+    }
+
+    private function sendPasswordResetMail(User $user){
+
+        $token = new PasswordResetToken($user);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($token);
+        $em->flush();
+
+        $mailer = $this->get('mailer');
+
+        $message = 'Bonjour : '.$user->getUsername().PHP_EOL;
+        $message .= 'Vous souhaitez reinitialiser votre mot de passe.'.PHP_EOL;
+        $message .= 'Cliquez sur le lien ci-dessous'.PHP_EOL;
+
+        $message .= $this->generateUrl('new_password', ['token' => (string) $token ], UrlGeneratorInterface::ABSOLUTE_URL);
+
+
+
+        $message = (new \Swift_Message('Message de contact utilisateur immobilier.ibohcompany.com'))
+            ->setFrom(['info@ibohcompany.com' => 'Immobilier-Iboh'])
+            ->setTo([ $user->getEmail() => $user->getUsername() ])
+            ->setBody($message);
+
+        $mailer->send($message);
     }
 
     /**

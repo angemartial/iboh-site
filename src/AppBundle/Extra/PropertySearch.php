@@ -10,6 +10,7 @@ namespace AppBundle\Extra;
 
 
 use AppBundle\Entity\Location;
+use AppBundle\Entity\Type;
 
 class PropertySearch
 {
@@ -17,6 +18,29 @@ class PropertySearch
      * @var Location
      */
     private $location;
+
+    /**
+     * @return Type
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param Type $type
+     * @return PropertySearch
+     */
+    public function setType(Type $type)
+    {
+        $this->type = $type;
+        return $this;
+    }
+
+    /**
+     * @var Type
+     */
+    private $type;
 
     /**
      * @var string
@@ -47,6 +71,7 @@ class PropertySearch
      * @var string
      */
     private $priceMin;
+
 
 
     /**

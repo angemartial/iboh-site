@@ -2677,7 +2677,7 @@ article blockquote {
     font-weight: 400;
     margin-bottom: 30px;
     text-align: center;
-    text-transform: capitalize;
+    text-transform: none;
 }
 .lost-password p {
   margin-bottom: 10px;
@@ -2804,15 +2804,15 @@ article blockquote {
     font-weight: 500;
     line-height: 16px;
     margin: 0;
-    text-transform: capitalize;
+    /* text-transform: capitalize; */
 }
 .profile-desc .input-type {
   margin-bottom: 25px;
 }
-.profile-desc .input-type > label,.social-form-box .input-type > label {
+.profile-desc .input-type > label, .social-form-box .input-type > label {
     color: #606060;
     font-weight: 400;
-    text-transform: capitalize;
+    /* text-transform: capitalize; */
 }
 .profile-desc .input-type,.social-form-box .input-type{
     margin-bottom: 15px;

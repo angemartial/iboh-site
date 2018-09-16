@@ -17,15 +17,20 @@
                                     <div class="row">
                                         <div class="profile-top-form">
                                             <div class="col-md-6 col-sm-6 col-xs-12">
+
                                                 <div class="input-type">
-                                                    <label>Votre Nom</label>
+                                                    <label>Nom utilisateur</label>
+                                                    <input name="username" type="text" placeholder="pseudo" value="{{ user.username }}">
+                                                </div>
+                                                <div class="input-type">
+                                                    <label>Votre nom</label>
                                                     <input name="lastname" type="text" placeholder="votre nom" value="{{ user.lastname }}">
                                                 </div>
 
                                             </div>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
                                                 <div class="input-type">
-                                                    <label>Votre Prénoms</label>
+                                                    <label>Votre prénoms</label>
                                                     <input name="firstname" type="text" placeholder="votre prénom" value="{{ user.firstname }}">
                                                 </div>
 
@@ -38,20 +43,20 @@
                                             </div>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
                                                 <div class="input-type">
-                                                    <label>Telehone</label>
+                                                    <label>Téléphone</label>
                                                     <input name="phone" type="text" placeholder="Telephone" value="{{ user.phone }}">
                                                 </div>
                                             </div>
 
-                                            <div class="profile-top-form-bottom">
-                                                <div class="col-md-12 col-sm-12 col-xs-12">
-                                                    <div class="input-type">
-                                                        <label>Statut</label>
-                                                        <input type="text" placeholder="votre statut" value="{{ user.statut }}">
-                                                    </div>
-                                                </div>
+                                            {#<div class="profile-top-form-bottom">#}
+                                                {#<div class="col-md-12 col-sm-12 col-xs-12">#}
+                                                    {#<div class="input-type">#}
+                                                        {#<label>Statut</label>#}
+                                                        {#<input type="text" placeholder="votre statut" value="{{ user.statut }}">#}
+                                                    {#</div>#}
+                                                {#</div>#}
 
-                                            </div>
+                                            {#</div>#}
                                         </div>
                                     </div>
                                 </div>
@@ -63,7 +68,7 @@
                                 <button type="submit">Appliquer </button>
                             </div>
                         </div>
-                    </div>
+                    {#</div>#}
                 </form>
 
                 <div class="row">
@@ -71,25 +76,25 @@
                     <div class="change-password mt-50">
                         <div class="col-md-12">
                             <div class="profile-title">
-                                <h5>Changer Mot de Passe</h5>
+                                <h5>Changer mot de passe</h5>
                             </div>
                         </div>
                         <form action="{{ path('update_user') }}" method="post">
                             <div class="col-md-4 col-sm-4 col-xs-12">
                                 <div class="input-type">
-                                    <label>Ancien Mot de Passe</label>
+                                    <label>Ancien mot de passe</label>
                                     <input name="former" type="password" placeholder="Entrer l'ancien mot de passe">
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-4 col-xs-12">
                                 <div class="input-type">
-                                    <label>Nouveau Mot de Passe</label>
+                                    <label>Nouveau mot de passe</label>
                                     <input name="plainPassword" type="password" placeholder="Entrer le nouveau mot de passe">
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-4 col-xs-12">
                                 <div class="input-type">
-                                    <label>Confirmer Nouveau de Passe</label>
+                                    <label>Confirmer nouveau de passe</label>
                                     <input name="confirm" type="password" placeholder=" Confirmer le mot de passe">
                                 </div>
                             </div>
