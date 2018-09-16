@@ -5,7 +5,7 @@
 {% block fos_user_content %}
     {% if error %}
         <div class="flash-error alert alert-error">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-       
+
     {% endif %}
     <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
 
