@@ -182,12 +182,13 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $property = $em->find(Property::class, (int) $id);
+        $unavailabilities = $property->getUnavailabilities();
 
         if(null === $property){
             throw $this->createNotFoundException('Propriété inexistante');
         }
 
-        return $this->render('default/detail-property.html.twig', ['property' => $property]);
+        return $this->render('default/detail-property.html.twig', ['property' => $property, 'unavailabilities' => $unavailabilities ]);
 
     }
 
@@ -205,7 +206,10 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository(Property::class);
         $properties = $repository->loadProperties($max, $type, $page);
-        return $this->render('default/property.html.twig', ['properties' => $properties, 'type' => $type, 'page' => $page, 'max' => $max, 'isSearch' => false]);
+        return $this->render('default/property.html.twig', ['properties' => $properties,
+            'type' => $type,
+            'page' => $page,
+            'max' => $max, 'isSearch' => false]);
     }
 
      /**
@@ -673,7 +677,9 @@ class DefaultController extends Controller
             $search = $form->getData();
             $repository = $em->getRepository(Property::class);
             $result = $repository->search($search);
-            return $this->render('default/property.html.twig', ['properties' => $result, 'page' => 1, 'max' => 12, 'isSearch' => true]);
+            return $this->render('default/property.html.twig', ['properties' => $result,
+                'page' => 1, 'max' => 12,
+                'isSearch' => true]);
         }
 
         return $this->render('default/search-property.html.twig', [

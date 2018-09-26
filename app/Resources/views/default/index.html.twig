@@ -159,6 +159,13 @@
                                                 LOCATION
                                             {% endif %}
                                         </span>
+
+                                            {% if property.furnished  %}
+                                            <span class="badge-furnished">
+                                                MEUBLE
+                                            </span>
+                                            {% endif %}
+
                                         <div class="property-img">
                                             <a href="{{ path('property_details', {id: property.id}) }}">
                                                 <img src="{% if property.images is not empty %} {{ asset('uploads/' ~ property.images[0]) }} {% else %} {{ asset('img/property/7.jpg') }} {% endif %}"

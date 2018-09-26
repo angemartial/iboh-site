@@ -21,6 +21,8 @@ use Doctrine\ORM\Mapping as ORM;
 class Property
 {
 
+    use Availability;
+
     /**
      * @var int Primary key of table
      * @ORM\Id()
@@ -29,6 +31,7 @@ class Property
      *
      */
     private $id;
+
 
     /**
      * @var string
@@ -47,6 +50,31 @@ class Property
      * @ORM\Column(name="sub_location", type="string", length=255)
      */
     private $subLocation;
+
+    /**
+     * @return bool
+     */
+    public function isFurnished(): bool
+    {
+        return $this->furnished;
+    }
+
+    /**
+     * @param bool $furnished
+     * @return Property
+     */
+    public function setFurnished(bool $furnished)
+    {
+        $this->furnished = $furnished;
+        return $this;
+    }
+
+    /**
+     * @var boolean
+     * @ORM\Column(name="furnished", type="boolean")
+     */
+    private $furnished;
+
 
     /**
      * @var integer
@@ -440,7 +468,7 @@ class Property
     /**
      * @return bool
      */
-    public function isPublished(): bool
+    public function isPublished()
     {
         return $this->published;
     }

@@ -103,9 +103,16 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
             <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="aside-title">
+                    <h5>Disponibilité</h5>
+                </div>
+                <div class="calendar-container">
+                    <div id="calendar" class="calendar"></div>
+                </div>
                 <div class="sidebar right-side">
                     <aside class="single-side-box search-property">
                         <div class="aside-title">
@@ -113,6 +120,7 @@
                         </div>
                         {{ render(controller('AppBundle\\Controller\\DefaultController::propertySearchAction')) }}
                     </aside>
+
                 </div>
             </div>
         </div>
@@ -124,15 +132,23 @@
     <script type="text/javascript" src="{{ asset('js/jquery.mousewheel.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/jquery.easing.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/jquery.flexslider.js') }}"></script>
+    <script src="{{ asset('codebase/dhtmlxcalendar.js') }}"></script>
     <script type="text/javascript">
         $(window).load(function() {
             $('.property-slider').flexslider({
                 animation: "slide",
                 controlNav: "thumbnails"
             });
+            var myCalendar = new dhtmlXCalendarObject("calendar");
+            myCalendar.show();
+            {% for unavailability in unavailabilities %}
+                myCalendar.setInsensitiveRange('{{ unavailability.begins|date('Y-m-d') }}', '{{ unavailability.ends|date('Y-m-d') }}');
+            {% endfor %}
         });
+
     </script>
 {% endblock %}
 {% block css %}
     <link rel="stylesheet" href="{{ asset('css/flexslider.css') }}">
+    <link rel="stylesheet" href="{{ asset('codebase/dhtmlxcalendar.css') }}">
 {% endblock %}
