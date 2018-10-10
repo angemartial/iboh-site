@@ -188,7 +188,8 @@ class DefaultController extends Controller
             throw $this->createNotFoundException('Propriété inexistante');
         }
 
-        return $this->render('default/detail-property.html.twig', ['property' => $property, 'unavailabilities' => $unavailabilities ]);
+        return $this->render('default/detail-property.html.twig',
+            ['property' => $property, 'unavailabilities' => $unavailabilities ]);
 
     }
 

@@ -1,0 +1,111 @@
+{% extends 'admin-layout.html.twig' %}
+
+{% block content %}
+    <div class="row clearfix">
+        <div class="col-lg-6 col-md-12 col-sm-12">
+            <div class="card">
+                <div class="header">
+                    <h2>
+                        Liste des localités
+                        <a data-title="Ajouter Localité" data-form-action="{{ path('add_location_or_property_type', { entity: 'location' }) }}" data-type="location" class="btn btn-primary modal-trigger" href="#new-location-or-type-modal" data-target="#new-location-or-type-modal" data-toggle="modal" >Ajouter localité</a>
+                    </h2>
+                </div>
+                <div class="body table-responsive">
+                    <table class="table m-b-0">
+                        <thead class="thead-light">
+                        <tr>
+
+                            <th scope="col">Nom de la localité</th>
+                            <th scope="col">Action</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for location in locations %}
+                        <tr>
+                            <td>{{ location.title }}</td>
+                            <td>
+                                <button type="button" data-type="confirm" class="btn btn-danger js-sweetalert" title="supprimer"><i class="fa fa-trash-o"></i></button></td>
+
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-lg-6 col-md-12 col-sm-12">
+            <div class="card">
+                <div class="header">
+                    <h2>Type de propriétés
+                        <a data-title="Ajouter Type" data-form-action="{{ path('add_location_or_property_type', { entity: 'type' }) }}" data-type="type" class="btn btn-primary modal-trigger" href="#new-location-or-type-modal" data-target="#new-location-or-type-modal" data-toggle="modal" >Ajouter Type de propriété</a>
+                    </h2>
+
+                </div>
+                <div class="body table-responsive">
+                    <table class="table m-b-0">
+                        <thead class="thead-light">
+                        <tr>
+                            <th scope="col">Type de propriétés</th>
+                            <th scope="col">Action</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for types in types %}
+                        <tr>
+                            <td>{{ types.title }}</td>
+                            <td>
+                                <button type="button" data-type="confirm" class="btn btn-danger js-sweetalert" title="supprimer"><i class="fa fa-trash-o"></i></button>
+                            </td>
+
+                        </tr>
+                       {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="new-location-or-type-modal" role="dialog">
+        <div class="modal-dialog" role="document">
+            <form id="new-form" action="" method="post">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="title" id="defaultModalLabel"></h4>
+                </div>
+                <div class="modal-body">
+
+                        <label class="col-md-12">Titre
+                            <input name="title" type="text" class="form-control">
+                        </label>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Valider</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                </div>
+
+            </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript">
+        $(function () {
+            $(document).on('click', '.modal-trigger', function (e) {
+                var target = $(e.currentTarget),
+                    title = target.attr('data-title'),
+                    formAction = target.attr('data-form-action'),
+                    modal = $('#new-location-or-type-modal');
+                modal.find('.modal-header h4').text(title);
+                modal.find('form').attr('action', formAction);
+            });
+        });
+    </script>
+{% endblock %}
+

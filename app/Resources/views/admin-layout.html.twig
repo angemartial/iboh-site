@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Admin</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="description" content="Mplify Bootstrap 4.1.1 Admin Template">
+    <meta name="author" content="ThemeMakker, design by: ThemeMakker.com">
+
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <!-- VENDOR CSS -->
+    <link rel="stylesheet" href="{{ asset('admin/assets/vendor/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/assets/vendor/animate-css/animate.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/assets/vendor/font-awesome/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/assets/vendor/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css') }}">
+
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="{{ asset('admin/light/assets/css/main.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/light/assets/css/color_skins.css') }}">
+    {% block css %}{% endblock %}
+</head>
+
+<body class="theme-blue">
+
+<!-- Overlay For Sidebars -->
+<div class="overlay" style="display: none;"></div>
+
+<div id="wrapper">
+
+    <nav class="navbar navbar-fixed-top">
+        <div class="container-fluid">
+
+            <div class="navbar-brand">
+                <a href="#">
+                    {#<img src="{{ asset('admin/assets/images/logo-icon.svg') }}" alt="Mplify Logo" class="img-responsive logo">#}
+                    <span class="name">IBOH Immobilier</span>
+                </a>
+            </div>
+
+            <div class="navbar-right">
+                <ul class="list-unstyled clearfix mb-0">
+                    <li>
+                        <div class="navbar-btn btn-toggle-show">
+                            <button type="button" class="btn-toggle-offcanvas"><i class="lnr lnr-menu fa fa-bars"></i></button>
+                        </div>
+                        <a href="javascript:void(0);" class="btn-toggle-fullwidth btn-toggle-hide"><i class="fa fa-bars"></i></a>
+                    </li>
+                    <li>
+                        <form id="navbar-search" class="navbar-form search-form">
+                            <input value="" class="form-control" placeholder="recherche..." type="text">
+                            <button type="button" class="btn btn-default"><i class="icon-magnifier"></i></button>
+                        </form>
+                    </li>
+                    <li>
+                        <div id="navbar-menu">
+                            <ul class="nav navbar-nav">
+
+
+                                <li class="dropdown">
+                                    <a href="javascript:void(0);" class="dropdown-toggle icon-menu" data-toggle="dropdown">
+                                        <img class="rounded-circle" src="{{ asset('admin/assets/images/user-small.png') }}" width="30" alt="">
+                                    </a>
+                                    <div class="dropdown-menu animated flipInY user-profile">
+                                        <div class="d-flex p-3 align-items-center">
+                                            <div class="drop-left m-r-10">
+                                                <img src="{{ asset('admin/assets/images/user-small.png') }}" class="rounded" width="50" alt="">
+                                            </div>
+                                            <div class="drop-right">
+                                                <h4>Samuel Morriss</h4>
+                                                <p class="user-name">samuelmorris@info.com</p>
+                                            </div>
+                                        </div>
+                                        <div class="m-t-10 p-3 drop-list">
+                                            <ul class="list-unstyled">
+                                                <li><a href="page-profile.html"><i class="icon-user"></i>My Profile</a></li>
+                                                <li><a href="app-inbox.html"><i class="icon-envelope-open"></i>Messages</a></li>
+                                                <li><a href="javascript:void(0);"><i class="icon-settings"></i>Settings</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="page-login.html"><i class="icon-power"></i>Logout</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div id="leftsidebar" class="sidebar">
+        <div class="sidebar-scroll">
+            <nav id="leftsidebar-nav" class="sidebar-nav">
+                <ul id="main-menu" class="metismenu">
+
+                    <li class="active"><a href="{{ path('admin_index') }}"><i class="icon-home"></i><span>Tableau de bord</span></a></li>
+
+                    <li class="middle">
+                        <a href="#uiElements" class="has-arrow"><i class="icon-home"></i><span>Propriétés</span></a>
+                        <ul>
+                            <li><a href="{{ path('admin_list_property') }}">Liste de propriétés</a></li>
+                            <li><a href="{{ path('add_property') }}">Ajouter une propriété</a></li>
+                            <li><a href="#">Créer une localité</a></li>
+                            <li><a href="#">Créer un type de propriété</a></li>
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#forms" class="has-arrow"><i class="icon-pencil"></i><span>Projets immobiliers</span></a>
+                        <ul>
+                            <li><a href="#">Ajouter un projet</a></li>
+
+                        </ul>
+                    </li>
+
+                    <li class="middle">
+                        <a href="#" class="has-arrow"><i class="icon-diamond"></i><span>Utilisateurs</span></a>
+                        <ul>
+                            <li><a href="#">Liste des utilisateurs</a></li>
+                            <li><a href="#">Ajouter un utilisateur</a></li>
+                            <li><a href="#">Créer une catégorie</a></li>
+
+                        </ul>
+                    </li>
+
+                    <li class="top">
+                        <a href="{{ path('dup_user_logout') }}" class="has-arrow"><i class="icon-docs"></i><span>Déconnexion</span></a>
+                    </li>
+
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <div id="main-content">
+        <div class="container-fluid">
+            {% block content %}
+            {% endblock %}
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Javascript -->
+<script src="{{ asset('admin/light/assets/bundles/libscripts.bundle.js') }}"></script>
+<script src="{{ asset('admin/light/assets/bundles/vendorscripts.bundle.js') }}"></script>
+
+
+<script src="{{ asset('admin/light/assets/bundles/knob.bundle.js') }}"></script> <!-- Jquery Knob-->
+<script src="{{ asset('admin/light/assets/bundles/flotscripts.bundle.js') }}"></script> <!-- flot charts Plugin Js -->
+<script src="{{ asset('admin/assets/vendor/flot-charts/jquery.flot.selection.js') }}"></script>
+
+<script src="{{ asset('admin/light/assets/bundles/mainscripts.bundle.js') }}"></script>
+<script src="{{ asset('admin/light/assets/js/index.js') }}"></script>
+{% block js %}{% endblock %}
+</body>
+</html>

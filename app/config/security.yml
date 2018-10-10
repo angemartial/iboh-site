@@ -51,5 +51,6 @@ security:
         - { path: ^/admin/ajouter-propriete, roles: ROLE_USER }
         - { path: ^/admin/sauvegarder-propriete, roles: ROLE_USER }
         - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/dashboard, roles: ROLE_ADMIN }
         - { path: ^/profile, roles: ROLE_USER }
         #- { path: ^/, role: ROLE_USER }

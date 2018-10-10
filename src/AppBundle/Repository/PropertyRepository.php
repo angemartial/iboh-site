@@ -17,17 +17,21 @@ class PropertyRepository extends \Doctrine\ORM\EntityRepository
      * @param $max
      * @param string $type
      * @param int $page
+     * @param bool $loadOnlyPublished
      * @return Paginator
      */
-    public function loadProperties($max, string $type = null, int $page = 1){
+    public function loadProperties($max, string $type = null, int $page = 1, $loadOnlyPublished = true){
 
         $qb = $this->createQueryBuilder('p')
             ->setFirstResult(($page - 1) * $max)
             ->orderBy('p.id', 'DESC')
-            ->where('p.published = :published')
-            ->setParameter('published', true)
             ->setMaxResults($max)
         ;
+
+        if($loadOnlyPublished){
+            $qb->where('p.published = :published')
+                ->setParameter('published', true);
+        }
 
         if('location' === $type || 'vente' === $type){
             if('location' === $type){

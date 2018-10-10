@@ -1,6 +1,11 @@
 app:
-    resource: '@AppBundle/Controller/'
+    resource: '@AppBundle/Controller/DefaultController.php'
     type: annotation
+
+admin:
+    resource: '@AppBundle/Controller/AdminController.php'
+    type: annotation
+    prefix: '/dashboard'
 
 dup_user:
     resource: "@DupUserBundle/Resources/config/routing.yml"

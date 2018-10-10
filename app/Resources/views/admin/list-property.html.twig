@@ -1,0 +1,143 @@
+{% extends 'admin-layout.html.twig' %}
+
+{% block content %}
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-5 col-md-8 col-sm-12">
+                <h2>Liste des propriétés</h2>
+            </div>
+            <div class="col-lg-7 col-md-4 col-sm-12 text-right">
+                <ul class="breadcrumb justify-content-end">
+                    <li class="breadcrumb-item"><a href="index.html"><i class="icon-home"></i></a></li>
+                    <li class="breadcrumb-item active">Liste des propriétés</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-lg-12">
+            <div class="card">
+                {#<div class="header">#}
+                    {#<h2>Basic Table <small>Basic example without any additional modification classes</small> </h2>#}
+                {#</div>#}
+                <div class="body">
+                    <div class="table-responsive">
+
+                        <table  class="table table-bordered table-hover js-basic-example dataTable table-custom">
+
+                            <thead>
+
+                            <tr>
+                                <th>Titre</th>
+                                <th>Localisation</th>
+                                <th>Status</th>
+                                <th>Type</th>
+                                <th>Publication</th>
+                                <th>Montant</th>
+                                <th>Actions</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for property in properties %}
+                            <tr>
+                                <td>{{ property.title }}</td>
+
+                                <td> {% if property.location is not null %} {{ property.location.title }} {% endif %}</td>
+
+                                <td>{% if property.sale is not null %}
+                                    Vente
+                                    {% else  %}
+                                    Location
+                                    {% endif %}
+                                    {% if property.furnished  %}
+                                    Meublé
+                                    {% endif %}
+                                </td>
+                                <td> {% if property.type is not null %} {{ property.type.title }} {% endif %}</td>
+
+                                <td>
+                                    <input data-target="{{ path('admin_publish_property', { propertyId: property.id }) }}" class="publish" type="checkbox" {% if property.published %} checked {% endif %} >
+                                </td>
+                                <td>{% if property.sale is not null %}
+                                        {{ property.sale.price| number_format(0, ',', ' ') }} CFA
+                                    {% else %}
+                                        {{ property.rental.monthly| number_format(0, ',', ' ') }} CFA / mois
+                                    {% endif %}
+                                    {#{% if property.furnished is not null %}#}
+                                    {#{{ property.sale.price| number_format(0, ',', ' ') }} CFA/Jr#}
+                                    {#{% endif %}#}
+                                </td>
+                                <td>
+                                    <a href="{{ path('property_details', {id: property.id}) }}">
+                                        <button type="button" class="btn btn-primary"><i class="fa fa-eye"></i></button></a>
+                                        <button type="button" data-type="confirm" class="btn btn-danger js-sweetalert" title="supprimer"><i class="fa fa-trash-o"></i></button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+
+                            <tfoot>
+                            <tr>
+                                <th>Titre</th>
+                                <th>Localisation</th>
+                                <th>Type</th>
+                                <th>Status</th>
+                                <th>Publier</th>
+                                <th>Montant</th>
+                                <th>Actions</th>
+                            </tr>
+                            </tfoot>
+
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript" src="{{ asset('admin/light/assets/js/pages/tables/jquery-datatable.js') }}"></script>
+
+    <!-- Javascript -->
+    <script src="{{ asset('admin/light/assets/bundles/libscripts.bundle.js') }}"></script>
+    <script src="{{ asset('admin/light/assets/bundles/vendorscripts.bundle.js') }}"></script>
+
+    <script src="{{ asset('admin/light/assets/bundles/datatablescripts.bundle.js') }}"></script>
+    <script src="{{ asset('admin/assets/vendor/jquery-datatable/buttons/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('admin/assets/vendor/jquery-datatable/buttons/buttons.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('admin/assets/vendor/jquery-datatable/buttons/buttons.colVis.min.js') }}"></script>
+    <script src="{{ asset('admin/assets/vendor/jquery-datatable/buttons/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('admin/assets/vendor/jquery-datatable/buttons/buttons.print.min.js') }}"></script>
+
+    <script src="{{ asset('admin/assets/vendor/sweetalert/sweetalert.min.js') }}"></script> <!-- SweetAlert Plugin Js -->
+
+
+    <script src="{{ asset('admin/light/assets/bundles/mainscripts.bundle.js') }}"></script>
+    <script src="{{ asset('admin/light/assets/bundles/morrisscripts.bundle.js') }}"></script>
+    <script src="{{ asset('admin/light/assets/js/pages/tables/jquery-datatable.js') }}"></script>
+    <script src="{{ asset('js/jquery.switcher.min.js') }}"></script>
+    <script type="text/javascript">
+        $(function(){
+            $.switcher('input[type=checkbox]');
+            $(document).on('change', 'input.publish', function (e) {
+                console.log('ko');
+                $.get($(this).attr('data-target'), { published: $(this).prop('checked') ? 1 : 0 }, function (e) {
+                    console.log('ok');
+                });
+            })
+        });
+    </script>
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ asset('admin/assets/vendor/jquery-datatable/dataTables.bootstrap4.min.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('admin/assets/vendor/jquery-datatable/fixedeader/dataTables.fixedcolumns.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/assets/vendor/jquery-datatable/fixedeader/dataTables.fixedheader.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/assets/vendor/sweetalert/sweetalert.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/switcher.css') }}">
+{% endblock %}

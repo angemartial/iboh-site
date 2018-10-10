@@ -366,7 +366,7 @@ class Property
     /**
      * @return Type
      */
-    public function getType(): Type
+    public function getType()
     {
         return $this->type;
     }

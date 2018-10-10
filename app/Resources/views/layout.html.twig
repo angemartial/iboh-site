@@ -42,7 +42,9 @@
                        <a href="#"><i class="fa fa-facebook-square"></i></a>
                         <div class="header-topbar-menu pull-right">
                             <ul>
-                                <li><a href="#"></a></li>
+                                {% if is_granted('ROLE_ADMIN') %}
+                                <li><a href="{{ path('admin_index') }}">Tableau de bord</a></li>
+                                {% endif %}
 
                                 {% if is_granted('ROLE_USER') %}
                                     <li><a href="{{ path('myaccount', {username: app.user.username }) }}">Connecté en tant que {{ app.user.username }} !</a></li>
